@@ -19,7 +19,6 @@ environment:
 dependencies:
   bloc: ^0.14.2
   flutter_bloc: ^0.16.0
-  sqflite: ^1.1.5
   flutter:
     sdk: flutter
 

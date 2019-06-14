@@ -1,7 +1,4 @@
-import 'package:anyunit/model/db/sqlite_attribute.dart';
-import 'package:anyunit/model/db/sqlite_entity.dart';
-
-class Unit extends SqliteEntity {
+class Unit {
   /// the name of the unit
   final String name;
 
@@ -18,12 +15,4 @@ class Unit extends SqliteEntity {
 
   Unit(this.name, this.standardUnit, this.getConvertedValue,
       this.getStandardizedValue);
-
-  @override
-  // TODO: implement attributes
-  Set<SqliteAttribute> get attributes => null;
-
-  @override
-  // TODO: implement tableName
-  String get tableName => null;
 }

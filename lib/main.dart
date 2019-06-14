@@ -8,10 +8,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'AnyUnit',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.grey[800],
-        canvasColor: Colors.grey[800],
-        accentColor: Colors.amber,
+        brightness: Brightness.light,
+        primaryColor: Colors.white,
+        accentColor: Colors.redAccent,
       ),
       home: MyHomePage(title: 'AnyUnit'),
     );
