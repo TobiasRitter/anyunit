@@ -1,6 +1,6 @@
 import 'package:anyunit/model/db/sqlite_attribute.dart';
 
-abstract class SqliteStorable {
+abstract class SqliteEntity {
   String get tableName;
   Set<SqliteAttribute> get attributes;
 

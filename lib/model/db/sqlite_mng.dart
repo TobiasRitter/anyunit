@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:anyunit/model/db/sqlite_connector.dart';
-import 'package:anyunit/model/db/sqlite_storable.dart';
+import 'package:anyunit/model/db/sqlite_entity.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqliteMng {
@@ -11,7 +11,7 @@ class SqliteMng {
     _databaseName = databaseName == null ? "db" : databaseName;
   }
 
-  Future checkDB(SqliteStorable storable) async {
+  Future checkDB(SqliteEntity storable) async {
     if (_database == null)
       _database = await SqliteConnector.loadDB(_databaseName);
     await SqliteConnector.create(
@@ -21,16 +21,16 @@ class SqliteMng {
     );
   }
 
-  Future<Set<SqliteStorable>> loadItemsOfType(Function constructor) async {
-    SqliteStorable storable = constructor();
+  Future<Set<SqliteEntity>> loadItemsOfType(Function constructor) async {
+    SqliteEntity storable = constructor();
     await checkDB(storable);
 
     List<Map<String, dynamic>> dbOutput =
         await SqliteConnector.select(_database, storable.tableName);
 
-    Set<SqliteStorable> output = Set();
+    Set<SqliteEntity> output = Set();
     for (Map<String, dynamic> map in dbOutput) {
-      SqliteStorable loadedItem = constructor();
+      SqliteEntity loadedItem = constructor();
       loadedItem.fromMap(map);
       output.add(loadedItem);
     }
@@ -38,7 +38,7 @@ class SqliteMng {
   }
 
   void saveTableItem(
-    SqliteStorable item,
+    SqliteEntity item,
   ) async {
     await checkDB(item);
     try {
@@ -49,7 +49,7 @@ class SqliteMng {
   }
 
   void updateTableItem(
-    SqliteStorable item,
+    SqliteEntity item,
     String where,
   ) async {
     await checkDB(item);
@@ -62,7 +62,7 @@ class SqliteMng {
   }
 
   void deleteTableItem(
-    SqliteStorable item,
+    SqliteEntity item,
     String where,
   ) async {
     await checkDB(item);

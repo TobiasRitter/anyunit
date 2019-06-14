@@ -1,6 +1,8 @@
 class SqliteAttribute {
-  /// references to the actual variable value
+  /// gets the actual variable value
   final Function getValue;
+
+  /// sets the actual variable value
   final Function(dynamic) setValue;
 
   /// sqlite column name
@@ -11,6 +13,7 @@ class SqliteAttribute {
 
   SqliteAttribute(this.getValue, this.setValue, this.name, this.definition);
 
+  /// returns the attribute in the format for an insert query
   String toString() {
     return "$name $definition";
   }
