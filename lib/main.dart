@@ -9,9 +9,9 @@ class MyApp extends StatelessWidget {
       title: 'AnyUnit',
       theme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.blueGrey[800],
-        canvasColor: Colors.blueGrey[700],
-        accentColor: Colors.yellow,
+        primaryColor: Colors.grey[800],
+        canvasColor: Colors.grey[800],
+        accentColor: Colors.amber,
       ),
       home: MyHomePage(title: 'AnyUnit'),
     );
