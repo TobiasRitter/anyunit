@@ -1,4 +1,5 @@
 import 'package:anyunit/model/unit.dart';
+import 'package:meta/meta.dart';
 
 /// object containing a group of units of the same type
 class Category {
@@ -9,8 +10,8 @@ class Category {
   final Set<Unit> units;
 
   /// creates a new category with given name and units
-  Category(
-    this.name,
-    this.units,
-  );
+  Category({
+    @required this.name,
+    @required this.units,
+  });
 }

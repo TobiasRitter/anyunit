@@ -1,4 +1,4 @@
-import 'package:quiver/core.dart';
+import 'package:meta/meta.dart';
 
 /// object representing a unit
 class Unit {
@@ -16,11 +16,11 @@ class Unit {
   ) getStandardizedValue;
 
   /// creates a new unit with the given name and conversion functions
-  Unit(
-    this.name,
-    this.getConvertedValue,
-    this.getStandardizedValue,
-  );
+  Unit({
+    @required this.name,
+    @required this.getConvertedValue,
+    @required this.getStandardizedValue,
+  });
 
   /// equals operator is comparing the name attributes
   bool operator ==(o) => o is Unit && o.name == this.name;

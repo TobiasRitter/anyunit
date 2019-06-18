@@ -1,5 +1,6 @@
 import 'package:anyunit/model/category.dart';
 import 'package:anyunit/model/unit.dart';
+import 'package:meta/meta.dart';
 
 /// a basic unit converter
 class Converter {
@@ -7,16 +8,16 @@ class Converter {
   final Set<Category> categories;
 
   /// creates a new converter with the given categories
-  Converter(
-    this.categories,
-  );
+  Converter({
+    @required this.categories,
+  });
 
   /// returns a map of unit names with their converted values
-  Map convert(
-    Unit originalUnit,
-    double originalValue,
-    Set<Unit> availableUnits,
-  ) {
+  Map convert({
+    @required Unit originalUnit,
+    @required double originalValue,
+    @required Set<Unit> availableUnits,
+  }) {
     Map results = Map();
     // use the standardized value for the calculation
     double standardizedValue = originalUnit.getStandardizedValue(originalValue);

@@ -8,13 +8,28 @@ abstract class ConverterEvent extends Equatable {
 }
 
 /// gets raised whenever the unit is changed
-class UnitChangedEvent extends ConverterEvent {}
+class UnitChangedEvent extends ConverterEvent {
+  final int unit;
 
-/// gets raised whenever the value is changed
-class ValueChangedEvent extends ConverterEvent {}
+  UnitChangedEvent({
+    @required this.unit,
+  });
+}
 
 /// gets raised whenever the convert button is pressed
-class ConvertButtonPressedEvent extends ConverterEvent {}
+class ConvertButtonPressedEvent extends ConverterEvent {
+  final double value;
+
+  ConvertButtonPressedEvent({
+    @required this.value,
+  });
+}
 
 /// gets raised whenever the unit category is changed
-class CategoryChangedEvent extends ConverterEvent {}
+class CategoryChangedEvent extends ConverterEvent {
+  final int category;
+
+  CategoryChangedEvent({
+    @required this.category,
+  });
+}

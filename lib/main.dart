@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // TODO: load automatically
+  // TODO: load dynamically
   List categories = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Icon(Icons.ac_unit),

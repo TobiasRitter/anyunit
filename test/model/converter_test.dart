@@ -5,24 +5,29 @@ import 'package:test_api/test_api.dart';
 
 void main() {
   test("conversion from celcius to fahrenheit is working", () {
-    Unit celcius =
-        Unit("celcius", (val) => val - 273.15, (val) => val + 273.15);
-    Unit fahrenheit = Unit("fahrenheit", (val) => (val - 273.15) * 9 / 5 + 32,
-        (val) => (val - 32) * 5 / 9 + 273.15);
+    Unit celcius = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
+    Unit fahrenheit = Unit(
+        name: "fahrenheit",
+        getConvertedValue: (val) => (val - 273.15) * 9 / 5 + 32,
+        getStandardizedValue: (val) => (val - 32) * 5 / 9 + 273.15);
 
     Category temperatures = Category(
-      "temperatures",
-      {
+      name: "temperatures",
+      units: {
         celcius,
         fahrenheit,
       },
     );
 
     Converter tempConverter = Converter(
-      {temperatures},
+      categories: {temperatures},
     );
 
-    Map conversionResults = tempConverter.convert(celcius, 20, {
+    Map conversionResults = tempConverter
+        .convert(originalUnit: celcius, originalValue: 20, availableUnits: {
       celcius,
       fahrenheit,
     });
@@ -31,24 +36,29 @@ void main() {
   });
 
   test("equal unit is not shown as a result", () {
-    Unit celcius =
-        Unit("celcius", (val) => val - 273.15, (val) => val + 273.15);
-    Unit celciusCopy =
-        Unit("celcius", (val) => val - 273.15, (val) => val + 273.15);
+    Unit celcius = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
+    Unit celciusCopy = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
 
     Category temperatures = Category(
-      "temperatures",
-      {
+      name: "temperatures",
+      units: {
         celcius,
         celciusCopy,
       },
     );
 
     Converter tempConverter = Converter(
-      {temperatures},
+      categories: {temperatures},
     );
 
-    Map conversionResults = tempConverter.convert(celcius, 20, {
+    Map conversionResults = tempConverter
+        .convert(originalUnit: celcius, originalValue: 20, availableUnits: {
       celcius,
       celciusCopy,
     });
