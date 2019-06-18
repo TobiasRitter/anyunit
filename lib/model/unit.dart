@@ -1,3 +1,5 @@
+import 'package:quiver/core.dart';
+
 /// object representing a unit
 class Unit {
   /// the name of the unit
@@ -19,4 +21,10 @@ class Unit {
     this.getConvertedValue,
     this.getStandardizedValue,
   );
+
+  /// equals operator is comparing the name attributes
+  bool operator ==(o) => o is Unit && o.name == this.name;
+
+  /// returns hash code depending on the name attribute
+  int get hashCode => name.hashCode;
 }
