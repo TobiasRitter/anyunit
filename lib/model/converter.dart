@@ -5,11 +5,16 @@ class Converter {
   /// set of all known unit categories
   final Set<Category> categories;
 
-  Converter(this.categories);
+  Converter(
+    this.categories,
+  );
 
   /// returns a map of unit names with their converted values
   Map convert(
-      Unit originalUnit, double originalValue, Set<Unit> availableUnits) {
+    Unit originalUnit,
+    double originalValue,
+    Set<Unit> availableUnits,
+  ) {
     Map results = Map();
     // use the standardized value for the calculation
     double standardizedValue = originalUnit.getStandardizedValue(originalValue);

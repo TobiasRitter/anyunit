@@ -7,5 +7,8 @@ class Category {
   /// all units in this category
   final Set<Unit> units;
 
-  Category(this.name, this.units);
+  Category(
+    this.name,
+    this.units,
+  );
 }
