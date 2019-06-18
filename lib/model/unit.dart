@@ -1,3 +1,4 @@
+/// object representing a unit
 class Unit {
   /// the name of the unit
   final String name;
@@ -12,6 +13,7 @@ class Unit {
     double referenceUnitValue,
   ) getStandardizedValue;
 
+  /// creates a new unit with the given name and conversion functions
   Unit(
     this.name,
     this.getConvertedValue,

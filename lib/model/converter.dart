@@ -1,10 +1,12 @@
 import 'package:anyunit/model/category.dart';
 import 'package:anyunit/model/unit.dart';
 
+/// a basic unit converter
 class Converter {
   /// set of all known unit categories
   final Set<Category> categories;
 
+  /// creates a new converter with the given categories
   Converter(
     this.categories,
   );
