@@ -1,4 +1,6 @@
+import 'package:anyunit/bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,66 +29,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // TODO: load dynamically
-  List categories = <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-      icon: Icon(Icons.ac_unit),
-      title: Text("Temperature"),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.directions_walk),
-      title: Text("Distance"),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.fitness_center),
-      title: Text("Weight"),
-    ),
-  ];
+  /// controller for the value input field
+  final TextEditingController valueController = TextEditingController();
 
-  // TODO: load dynamically
-  List items = <DropdownMenuItem>[
-    DropdownMenuItem(
-      value: "aaa",
-      child: Text("aaa"),
-    ),
-  ];
+  /// bloc for the unit conversion
+  final ConverterBloc bloc = ConverterBloc();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: categories,
-      ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextField(),
-                ),
-                DropdownButton(
-                  onChanged: null,
-                  value: items[0].value,
-                  items: items,
-                ),
-                FloatingActionButton(
-                  child: Icon(Icons.arrow_forward),
-                  onPressed: null,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+    return BlocBuilder(
+      bloc: bloc,
+      builder: (BuildContext context, ConverterState state) {
+        return Scaffold();
+      },
     );
+  }
+
+  /// dispose controller and bloc
+  @override
+  void dispose() {
+    valueController.dispose();
+    bloc.dispose();
+    super.dispose();
   }
 }
