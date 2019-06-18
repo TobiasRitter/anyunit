@@ -15,3 +15,6 @@ class ValueChangedEvent extends ConverterEvent {}
 
 /// gets raised whenever the convert button is pressed
 class ConvertButtonPressedEvent extends ConverterEvent {}
+
+/// gets raised whenever the unit category is changed
+class CategoryChangedEvent extends ConverterEvent {}
