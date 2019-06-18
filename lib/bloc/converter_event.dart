@@ -17,10 +17,10 @@ class UnitChangedEvent extends ConverterEvent {
 }
 
 /// gets raised whenever the convert button is pressed
-class ConvertButtonPressedEvent extends ConverterEvent {
-  final double value;
+class StartConversionEvent extends ConverterEvent {
+  final String value;
 
-  ConvertButtonPressedEvent({
+  StartConversionEvent({
     @required this.value,
   });
 }
@@ -33,3 +33,6 @@ class CategoryChangedEvent extends ConverterEvent {
     @required this.category,
   });
 }
+
+/// gets raised whenever the back button is pressed
+class BackToInputEvent extends ConverterEvent {}

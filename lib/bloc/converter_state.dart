@@ -3,23 +3,24 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class ConverterState extends Equatable {
-  ConverterState([List props = const []]) : super(props);
+  ConverterState(this.value, this.category, this.unit, [List props = const []])
+      : super(props);
+
+  final String value;
+  final int category;
+  final int unit;
 }
 
 class InputState extends ConverterState {
-  final double value;
-  final int category;
-  final int unit;
-
   InputState({
-    @required this.value,
-    @required this.category,
-    @required this.unit,
-  });
+    @required String value,
+    @required int category,
+    @required int unit,
+  }) : super(value, category, unit);
 
   factory InputState.initial() {
     return InputState(
-      value: 0.0,
+      value: "0.0",
       category: 0,
       unit: 0,
     );
@@ -38,12 +39,21 @@ class InputState extends ConverterState {
   }
 }
 
-class LoadingState extends ConverterState {}
+class LoadingState extends ConverterState {
+  LoadingState({
+    @required String value,
+    @required int category,
+    @required int unit,
+  }) : super(value, category, unit);
+}
 
 class ResultState extends ConverterState {
   final Map<String, dynamic> results;
 
   ResultState({
+    @required String value,
+    @required int category,
+    @required int unit,
     @required this.results,
-  });
+  }) : super(value, category, unit);
 }

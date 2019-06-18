@@ -1,4 +1,5 @@
 import 'package:anyunit/bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +41,56 @@ class _MyHomePageState extends State<MyHomePage> {
     return BlocBuilder(
       bloc: bloc,
       builder: (BuildContext context, ConverterState state) {
-        return Scaffold();
+        return (state is InputState)
+            ? Scaffold(
+                body: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        color: Theme.of(context).accentColor,
+                        child: Center(
+                          child: TextField(
+                            controller: valueController,
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            decoration: InputDecoration.collapsed(
+                              hintText: "Enter a value",
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: DropdownButton(
+                        onChanged: null,
+                        items: null,
+                      ),
+                    )
+                  ],
+                ),
+                floatingActionButton: FloatingActionButton.extended(
+                  label: Text(
+                    "CONVERT",
+                  ),
+                  onPressed: () => bloc.dispatch(
+                      StartConversionEvent(value: valueController.text)),
+                  icon: Icon(
+                    Icons.arrow_forward,
+                  ),
+                ),
+              )
+            : Scaffold(
+                appBar: AppBar(
+                  centerTitle: true,
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                    ),
+                    onPressed: () => bloc.dispatch(BackToInputEvent()),
+                  ),
+                  title: Text("${state.value} ${state.unit}"),
+                ),
+              );
       },
     );
   }
