@@ -27,7 +27,7 @@ class InputState extends ConverterState {
     @required Set<String> units,
   }) {
     return InputState(
-      value: "0.0",
+      value: "0",
       categoryIndex: 0,
       categories: categories,
       unit: units.elementAt(0),

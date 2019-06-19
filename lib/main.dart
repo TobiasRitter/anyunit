@@ -41,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return BlocBuilder(
       bloc: bloc,
       builder: (BuildContext context, ConverterState state) {
+        valueController.text = state.value.toString();
         return (state is InputState)
             ? Scaffold(
                 bottomNavigationBar: BottomNavigationBar(
