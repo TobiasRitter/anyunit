@@ -26,11 +26,8 @@ void main() {
       categories: {temperatures},
     );
 
-    Map conversionResults = tempConverter
-        .convert(originalUnit: celcius, originalValue: 20, availableUnits: {
-      celcius,
-      fahrenheit,
-    });
+    Map conversionResults = tempConverter.convert(
+        originalUnit: celcius, originalValue: 20, category: temperatures);
     expect(conversionResults.length, 1);
     expect(conversionResults.containsValue(68.0), true);
   });
@@ -57,11 +54,51 @@ void main() {
       categories: {temperatures},
     );
 
-    Map conversionResults = tempConverter
-        .convert(originalUnit: celcius, originalValue: 20, availableUnits: {
-      celcius,
-      celciusCopy,
-    });
+    Map conversionResults = tempConverter.convert(
+        originalUnit: celcius, originalValue: 20, category: temperatures);
     expect(conversionResults.length, 0);
+  });
+
+  test("unit has to be in the selected category", () {
+    Unit celcius = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
+    Unit kg = Unit(
+      name: "kg",
+      getConvertedValue: (val) => val / 1000,
+      getStandardizedValue: (val) => val * 1000,
+    );
+
+    Category temperature = Category(
+      name: "temperature",
+      units: {
+        celcius,
+      },
+    );
+
+    Category weight = Category(
+      name: "weight",
+      units: {
+        kg,
+      },
+    );
+
+    Converter converter = Converter(
+      categories: {
+        temperature,
+        weight,
+      },
+    );
+
+    expect(
+        () => converter.convert(
+              originalUnit: celcius,
+              originalValue: 20,
+              category: weight,
+            ),
+        throwsA(predicate((e) =>
+            e is ArgumentError &&
+            e.message == "unit is not in the selected category")));
   });
 }
