@@ -61,49 +61,6 @@ void main() {
     expect(conversionResults.length, 0);
   });
 
-  test("unit has to be in the selected category", () {
-    Unit celcius = Unit(
-        name: "celcius",
-        getConvertedValue: (val) => val - 273.15,
-        getStandardizedValue: (val) => val + 273.15);
-    Unit kg = Unit(
-      name: "kg",
-      getConvertedValue: (val) => val / 1000,
-      getStandardizedValue: (val) => val * 1000,
-    );
-
-    Category temperature = Category(
-      name: "temperature",
-      units: {
-        celcius,
-      },
-    );
-
-    Category weight = Category(
-      name: "weight",
-      units: {
-        kg,
-      },
-    );
-
-    Converter converter = Converter(
-      categories: {
-        temperature,
-        weight,
-      },
-    );
-
-    // select the weight category
-    converter.selectedCategory = weight;
-    expect(
-        () => converter.convert(
-              originalValue: 20,
-            ),
-        throwsA(predicate((e) =>
-            e is ArgumentError &&
-            e.message == "unit is not in the selected category")));
-  });
-
   test("categories has to contain at least one category", () {
     expect(
         () => Converter(categories: {}),
@@ -160,5 +117,60 @@ void main() {
     converter.convert(originalValue: 20);
     converter.convert(originalValue: 20.0);
     converter.convert(originalValue: "20");
+  });
+
+  test("unknown category cannot be selected", () {
+    Unit celcius = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
+
+    Category temperature = Category(
+      name: "temperature",
+      units: {
+        celcius,
+      },
+    );
+
+    Converter converter = Converter(
+      categories: {
+        temperature,
+      },
+    );
+
+    expect(
+        () => converter.selectedCategory =
+            Category(name: "unknown", units: {celcius}),
+        throwsA(predicate(
+            (e) => e is ArgumentError && e.message == "unknown category")));
+  });
+
+  test("selected unit has to be in selected category", () {
+    Unit celcius = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
+
+    Category temperature = Category(
+      name: "temperature",
+      units: {
+        celcius,
+      },
+    );
+
+    Converter converter = Converter(
+      categories: {
+        temperature,
+      },
+    );
+
+    expect(
+        () => converter.selectedUnit = Unit(
+            name: "unknown",
+            getConvertedValue: (val) => val,
+            getStandardizedValue: (val) => val),
+        throwsA(predicate((e) =>
+            e is ArgumentError &&
+            e.message == "unit is not in the selected category")));
   });
 }

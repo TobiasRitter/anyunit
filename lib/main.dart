@@ -45,8 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
         return (state is InputState)
             ? Scaffold(
                 bottomNavigationBar: BottomNavigationBar(
-                  onTap: (index) =>
-                      bloc.dispatch(CategoryChangedEvent(categoryIndex: index)),
+                  onTap: bloc.onCategoryChanged,
                   currentIndex: state.categoryIndex,
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
@@ -74,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Theme.of(context).accentColor,
                         child: Center(
                           child: TextField(
+                            autofocus: true,
                             controller: valueController,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
@@ -88,8 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Center(
                         child: DropdownButton(
                           value: state.unit,
-                          onChanged: (value) =>
-                              bloc.dispatch(UnitChangedEvent(unit: value)),
+                          onChanged: bloc.onUnitChanged,
                           items: state.units
                               .map((unit) => DropdownMenuItem<String>(
                                     value: unit,
@@ -106,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     "CONVERT",
                   ),
                   onPressed: () => bloc.dispatch(
-                      StartConversionEvent(value: valueController.text)),
+                      ConvertPressedEvent(value: valueController.text)),
                   icon: Icon(
                     Icons.arrow_forward,
                   ),
@@ -119,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(
                       Icons.arrow_back,
                     ),
-                    onPressed: () => bloc.dispatch(BackToInputEvent()),
+                    onPressed: bloc.onBackPressed,
                   ),
                   title: Text("${state.value} ${state.unit}"),
                 ),
@@ -134,7 +133,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           );
                         },
                       )
-                    : null);
+                    : null,
+              );
       },
     );
   }

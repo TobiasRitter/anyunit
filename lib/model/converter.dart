@@ -8,10 +8,29 @@ class Converter {
   final Set<Category> categories;
 
   /// the currently selected category
-  Category selectedCategory;
+  Category _selectedCategory;
 
   /// the currently selected unit
-  Unit selectedUnit;
+  Unit _selectedUnit;
+
+  Category get selectedCategory => _selectedCategory;
+
+  set selectedCategory(Category category) {
+    if (!categories.contains(category)) {
+      throw ArgumentError("unknown category");
+    }
+    _selectedCategory = category;
+    _selectedUnit = _selectedCategory.units.elementAt(0);
+  }
+
+  Unit get selectedUnit => _selectedUnit;
+
+  set selectedUnit(Unit unit) {
+    if (!_selectedCategory.units.contains(unit)) {
+      throw ArgumentError("unit is not in the selected category");
+    }
+    _selectedUnit = unit;
+  }
 
   /// creates a new converter with the given categories
   Converter({
@@ -32,11 +51,6 @@ class Converter {
   Map<String, String> convert({
     @required dynamic originalValue,
   }) {
-    // check if the original unit is valid
-    if (!selectedCategory.units.contains(selectedUnit)) {
-      throw ArgumentError("unit is not in the selected category");
-    }
-
     // try to convert the given value into a double
     double parsedValue = double.tryParse(originalValue.toString());
     if (parsedValue == null) {
