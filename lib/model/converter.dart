@@ -16,17 +16,18 @@ class Converter {
   Map convert({
     @required Unit originalUnit,
     @required double originalValue,
-    @required Set<Unit> availableUnits,
+    @required Category category,
   }) {
+    // check if the original unit is valid
+    if (!category.units.contains(originalUnit)) {
+      throw ArgumentError("unit is not in the selected category");
+    }
+
     Map results = Map();
     // use the standardized value for the calculation
     double standardizedValue = originalUnit.getStandardizedValue(originalValue);
 
-    // get the category of the unit to convert
-    Category containingCategory = categories
-        .firstWhere((category) => category.units.contains(originalUnit));
-
-    for (Unit unit in containingCategory.units) {
+    for (Unit unit in category.units) {
       // convert into all units of the same category
       if (unit != originalUnit) {
         results[unit.name] = unit.getConvertedValue(standardizedValue);
