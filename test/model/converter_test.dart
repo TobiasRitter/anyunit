@@ -95,6 +95,8 @@ void main() {
       },
     );
 
+    // select the weight category
+    converter.selectedCategory = weight;
     expect(
         () => converter.convert(
               originalUnit: celcius,
