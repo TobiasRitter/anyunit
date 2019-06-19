@@ -7,11 +7,15 @@ class Converter {
   /// set of all known unit categories
   final Set<Category> categories;
 
+  // TODO: move to bloc
+
   /// the currently selected category
   Category _selectedCategory;
 
   /// the currently selected unit
   Unit _selectedUnit;
+
+  double value = 0;
 
   Category get selectedCategory => _selectedCategory;
 
@@ -48,11 +52,9 @@ class Converter {
   }
 
   /// returns a map of unit names with their converted values
-  Map<String, String> convert({
-    @required dynamic originalValue,
-  }) {
+  Map<String, String> convert() {
     // try to convert the given value into a double
-    double parsedValue = double.tryParse(originalValue.toString());
+    double parsedValue = double.tryParse(value.toString());
     if (parsedValue == null) {
       throw ArgumentError("value is no valid int or double");
     }

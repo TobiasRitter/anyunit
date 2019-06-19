@@ -26,9 +26,8 @@ void main() {
       categories: {temperatures},
     );
 
-    Map<String, String> conversionResults = tempConverter.convert(
-      originalValue: 20,
-    );
+    tempConverter.value = 20;
+    Map<String, String> conversionResults = tempConverter.convert();
     expect(conversionResults.length, 1);
     expect(conversionResults.containsValue("68.0"), true);
   });
@@ -55,9 +54,7 @@ void main() {
       categories: {temperatures},
     );
 
-    Map conversionResults = tempConverter.convert(
-      originalValue: 20,
-    );
+    Map conversionResults = tempConverter.convert();
     expect(conversionResults.length, 0);
   });
 
@@ -67,56 +64,6 @@ void main() {
         throwsA(predicate((e) =>
             e is ArgumentError &&
             e.message == "at least one category needed")));
-  });
-
-  test("value must be an int, double or properly formatted string", () {
-    Unit celcius = Unit(
-        name: "celcius",
-        getConvertedValue: (val) => val - 273.15,
-        getStandardizedValue: (val) => val + 273.15);
-
-    Category temperature = Category(
-      name: "temperature",
-      units: {
-        celcius,
-      },
-    );
-
-    Converter converter = Converter(
-      categories: {
-        temperature,
-      },
-    );
-
-    expect(
-        () => converter.convert(originalValue: "a"),
-        throwsA(predicate((e) =>
-            e is ArgumentError &&
-            e.message == "value is no valid int or double")));
-  });
-
-  test("value can be int, double or properly formatted string", () {
-    Unit celcius = Unit(
-        name: "celcius",
-        getConvertedValue: (val) => val - 273.15,
-        getStandardizedValue: (val) => val + 273.15);
-
-    Category temperature = Category(
-      name: "temperature",
-      units: {
-        celcius,
-      },
-    );
-
-    Converter converter = Converter(
-      categories: {
-        temperature,
-      },
-    );
-
-    converter.convert(originalValue: 20);
-    converter.convert(originalValue: 20.0);
-    converter.convert(originalValue: "20");
   });
 
   test("unknown category cannot be selected", () {

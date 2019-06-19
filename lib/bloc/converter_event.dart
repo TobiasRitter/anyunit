@@ -17,13 +17,7 @@ class UnitChangedEvent extends ConverterEvent {
 }
 
 /// gets raised whenever the convert button is pressed
-class ConvertPressedEvent extends ConverterEvent {
-  final String value;
-
-  ConvertPressedEvent({
-    @required this.value,
-  });
-}
+class ConvertPressedEvent extends ConverterEvent {}
 
 /// gets raised whenever the unit category is changed
 class CategoryChangedEvent extends ConverterEvent {
@@ -36,3 +30,12 @@ class CategoryChangedEvent extends ConverterEvent {
 
 /// gets raised whenever the back button is pressed
 class BackPressedEvent extends ConverterEvent {}
+
+/// gets raised whenever the value to convert changes
+class ValueChangedEvent extends ConverterEvent {
+  final String value;
+
+  ValueChangedEvent({
+    @required this.value,
+  });
+}

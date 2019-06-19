@@ -37,6 +37,13 @@ class _MyHomePageState extends State<MyHomePage> {
   final ConverterBloc bloc = ConverterBloc();
 
   @override
+  void initState() {
+    super.initState();
+    valueController
+        .addListener(() => bloc.onValueChanged(valueController.text));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: bloc,
@@ -104,8 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   label: Text(
                     "CONVERT",
                   ),
-                  onPressed: () => bloc.dispatch(
-                      ConvertPressedEvent(value: valueController.text)),
+                  onPressed: bloc.onConvertPressed,
                   icon: Icon(
                     Icons.arrow_forward,
                   ),

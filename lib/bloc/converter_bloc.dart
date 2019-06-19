@@ -62,9 +62,9 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
       );
     } else if (event is ConvertPressedEvent) {
       yield ResultState(
-        value: event.value,
+        value: converter.value.toString(),
         unit: converter.selectedUnit.name,
-        results: converter.convert(originalValue: event.value),
+        results: converter.convert(),
       );
     } else if (event is CategoryChangedEvent) {
       converter.selectedCategory =
@@ -77,17 +77,23 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
       );
     } else if (event is BackPressedEvent) {
       yield initialState;
+    } else if (event is ValueChangedEvent) {
+      converter.value = double.parse(event.value);
+      yield (currentState as InputState).copyWith(
+        value: converter.value.toString(),
+      );
     }
   }
 
   void onUnitChanged(String unit) => dispatch(UnitChangedEvent(unit: unit));
 
-  // TODO: remove value param
-  void onConvertPressed(String value) =>
-      dispatch(ConvertPressedEvent(value: value));
+  void onConvertPressed() => dispatch(ConvertPressedEvent());
 
   void onCategoryChanged(int categoryIndex) =>
       dispatch(CategoryChangedEvent(categoryIndex: categoryIndex));
 
   void onBackPressed() => dispatch(BackPressedEvent());
+
+  void onValueChanged(String value) =>
+      dispatch(ValueChangedEvent(value: value));
 }
