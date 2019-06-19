@@ -31,6 +31,11 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
             getConvertedValue: (val) => val - 273.15,
             getStandardizedValue: (val) => val + 273.15,
           ),
+          Unit(
+            name: "fahrenheit",
+            getConvertedValue: (val) => (val - 273.15) * 9 / 5 + 32,
+            getStandardizedValue: (val) => (val - 32) * 5 / 9 + 273.15,
+          ),
         },
       ),
     },
@@ -61,20 +66,18 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
       yield ResultState(
         value: event.value,
         unit: converter.selectedUnit.name,
-        results: converter.convert(originalValue: double.parse(event.value)),
+        results: converter.convert(originalValue: event.value),
       );
     } else if (event is CategoryChangedEvent) {
       yield (currentState as InputState)
           .copyWith(categoryIndex: event.categoryIndex);
     } else if (event is BackToInputEvent) {
       yield InputState.initial(
-        categories: <String>{
-          "Weight",
-          "Temperature",
-        },
-        units: <String>{
-          "kg",
-        },
+        categories: converter.categories
+            .map<String>((category) => category.name)
+            .toSet(),
+        units:
+            converter.selectedCategory.units.map((unit) => unit.name).toSet(),
       );
     }
   }

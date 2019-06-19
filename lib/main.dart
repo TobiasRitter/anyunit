@@ -44,6 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
         return (state is InputState)
             ? Scaffold(
                 bottomNavigationBar: BottomNavigationBar(
+                  onTap: (index) =>
+                      bloc.dispatch(CategoryChangedEvent(categoryIndex: index)),
+                  currentIndex: state.categoryIndex,
                   items: <BottomNavigationBarItem>[
                     BottomNavigationBarItem(
                       icon: Icon(
@@ -82,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     Expanded(
                       child: DropdownButton(
-                        value: state.units.elementAt(0),
+                        value: state.unit,
                         onChanged: (value) =>
                             bloc.dispatch(UnitChangedEvent(unit: value)),
                         items: state.units
@@ -117,7 +120,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   title: Text("${state.value} ${state.unit}"),
                 ),
-              );
+                body: (state is ResultState)
+                    ? ListView.builder(
+                        itemCount: state.results.length,
+                        itemBuilder: (BuildContext ctxt, int index) {
+                          return ListTile(
+                            title: Text(
+                              "${state.results.values.elementAt(index)} ${state.results.keys.elementAt(index)}",
+                            ),
+                          );
+                        },
+                      )
+                    : null);
       },
     );
   }

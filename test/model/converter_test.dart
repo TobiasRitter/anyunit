@@ -26,11 +26,11 @@ void main() {
       categories: {temperatures},
     );
 
-    Map conversionResults = tempConverter.convert(
+    Map<String, String> conversionResults = tempConverter.convert(
       originalValue: 20,
     );
     expect(conversionResults.length, 1);
-    expect(conversionResults.containsValue(68.0), true);
+    expect(conversionResults.containsValue("68.0"), true);
   });
 
   test("equal unit is not shown as a result", () {
@@ -110,5 +110,31 @@ void main() {
         throwsA(predicate((e) =>
             e is ArgumentError &&
             e.message == "at least one category needed")));
+  });
+
+  test("value to convert has to be a int or double", () {
+    Unit celcius = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
+
+    Category temperature = Category(
+      name: "temperature",
+      units: {
+        celcius,
+      },
+    );
+
+    Converter converter = Converter(
+      categories: {
+        temperature,
+      },
+    );
+
+    expect(
+        () => converter.convert(originalValue: "a"),
+        throwsA(predicate((e) =>
+            e is ArgumentError &&
+            e.message == "value is no valid int or double")));
   });
 }

@@ -30,16 +30,22 @@ class Converter {
 
   /// returns a map of unit names with their converted values
   Map<String, String> convert({
-    @required double originalValue,
+    @required dynamic originalValue,
   }) {
     // check if the original unit is valid
     if (!selectedCategory.units.contains(selectedUnit)) {
       throw ArgumentError("unit is not in the selected category");
     }
 
+    // try to convert the given value into a double
+    if (originalValue is! int && originalValue is! double) {
+      throw ArgumentError("value is no valid int or double");
+    }
+
     Map<String, String> results = Map();
     // use the standardized value for the calculation
-    double standardizedValue = selectedUnit.getStandardizedValue(originalValue);
+    dynamic standardizedValue =
+        selectedUnit.getStandardizedValue(originalValue.toDouble());
 
     for (Unit unit in selectedCategory.units) {
       // convert into all units of the same category
