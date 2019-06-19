@@ -85,16 +85,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Expanded(
-                      child: DropdownButton(
-                        value: state.unit,
-                        onChanged: (value) =>
-                            bloc.dispatch(UnitChangedEvent(unit: value)),
-                        items: state.units
-                            .map((unit) => DropdownMenuItem<String>(
-                                  value: unit,
-                                  child: Text(unit),
-                                ))
-                            .toList(),
+                      child: Center(
+                        child: DropdownButton(
+                          value: state.unit,
+                          onChanged: (value) =>
+                              bloc.dispatch(UnitChangedEvent(unit: value)),
+                          items: state.units
+                              .map((unit) => DropdownMenuItem<String>(
+                                    value: unit,
+                                    child: Text(unit),
+                                  ))
+                              .toList(),
+                        ),
                       ),
                     )
                   ],

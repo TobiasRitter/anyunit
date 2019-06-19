@@ -67,8 +67,14 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
         results: converter.convert(originalValue: event.value),
       );
     } else if (event is CategoryChangedEvent) {
+      converter.selectedCategory =
+          converter.categories.elementAt(event.categoryIndex);
+      converter.selectedUnit = converter.selectedCategory.units.elementAt(0);
       yield (currentState as InputState).copyWith(
         categoryIndex: event.categoryIndex,
+        unit: converter.selectedUnit.name,
+        units:
+            converter.selectedCategory.units.map((unit) => unit.name).toSet(),
       );
     } else if (event is BackToInputEvent) {
       yield initialState;
