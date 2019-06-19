@@ -50,16 +50,18 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
     ConverterEvent event,
   ) async* {
     if (event is UnitChangedEvent) {
+      converter.selectedUnit = converter.selectedCategory.units
+          .firstWhere((unit) => unit.name == event.unit);
       yield (currentState as InputState).copyWith(unit: event.unit);
     } else if (event is StartConversionEvent) {
       yield LoadingState(
         value: event.value,
-        unit: null,
+        unit: converter.selectedUnit.name,
       );
       yield ResultState(
         value: event.value,
-        unit: null,
-        results: null,
+        unit: converter.selectedUnit.name,
+        results: converter.convert(originalValue: double.parse(event.value)),
       );
     } else if (event is CategoryChangedEvent) {
       yield (currentState as InputState)

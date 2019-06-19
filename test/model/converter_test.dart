@@ -27,7 +27,6 @@ void main() {
     );
 
     Map conversionResults = tempConverter.convert(
-      originalUnit: celcius,
       originalValue: 20,
     );
     expect(conversionResults.length, 1);
@@ -57,7 +56,6 @@ void main() {
     );
 
     Map conversionResults = tempConverter.convert(
-      originalUnit: celcius,
       originalValue: 20,
     );
     expect(conversionResults.length, 0);
@@ -99,7 +97,6 @@ void main() {
     converter.selectedCategory = weight;
     expect(
         () => converter.convert(
-              originalUnit: celcius,
               originalValue: 20,
             ),
         throwsA(predicate((e) =>

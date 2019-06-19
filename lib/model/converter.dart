@@ -10,6 +10,9 @@ class Converter {
   /// the currently selected category
   Category selectedCategory;
 
+  /// the currently selected unit
+  Unit selectedUnit;
+
   /// creates a new converter with the given categories
   Converter({
     @required this.categories,
@@ -18,28 +21,31 @@ class Converter {
     if (categories.length == 0) {
       throw ArgumentError("at least one category needed");
     }
-    //select the first category by default
+    // select the first category by default
     selectedCategory = categories.elementAt(0);
+
+    // select the first unit by default
+    selectedUnit = selectedCategory.units.elementAt(0);
   }
 
   /// returns a map of unit names with their converted values
-  Map convert({
-    @required Unit originalUnit,
+  Map<String, String> convert({
     @required double originalValue,
   }) {
     // check if the original unit is valid
-    if (!selectedCategory.units.contains(originalUnit)) {
+    if (!selectedCategory.units.contains(selectedUnit)) {
       throw ArgumentError("unit is not in the selected category");
     }
 
-    Map results = Map();
+    Map<String, String> results = Map();
     // use the standardized value for the calculation
-    double standardizedValue = originalUnit.getStandardizedValue(originalValue);
+    double standardizedValue = selectedUnit.getStandardizedValue(originalValue);
 
     for (Unit unit in selectedCategory.units) {
       // convert into all units of the same category
-      if (unit != originalUnit) {
-        results[unit.name] = unit.getConvertedValue(standardizedValue);
+      if (unit != selectedUnit) {
+        results[unit.name] =
+            unit.getConvertedValue(standardizedValue).toString();
       }
     }
     return results;
