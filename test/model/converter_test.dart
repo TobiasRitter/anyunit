@@ -27,7 +27,9 @@ void main() {
     );
 
     Map conversionResults = tempConverter.convert(
-        originalUnit: celcius, originalValue: 20, category: temperatures);
+      originalUnit: celcius,
+      originalValue: 20,
+    );
     expect(conversionResults.length, 1);
     expect(conversionResults.containsValue(68.0), true);
   });
@@ -55,7 +57,9 @@ void main() {
     );
 
     Map conversionResults = tempConverter.convert(
-        originalUnit: celcius, originalValue: 20, category: temperatures);
+      originalUnit: celcius,
+      originalValue: 20,
+    );
     expect(conversionResults.length, 0);
   });
 
@@ -95,10 +99,17 @@ void main() {
         () => converter.convert(
               originalUnit: celcius,
               originalValue: 20,
-              category: weight,
             ),
         throwsA(predicate((e) =>
             e is ArgumentError &&
             e.message == "unit is not in the selected category")));
+  });
+
+  test("categories has to contain at least one category", () {
+    expect(
+        () => Converter(categories: {}),
+        throwsA(predicate((e) =>
+            e is ArgumentError &&
+            e.message == "at least one category needed")));
   });
 }
