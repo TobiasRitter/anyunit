@@ -36,7 +36,8 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
         categories: converter.categories
             .map<String>((category) => category.name)
             .toSet(),
-        units: null,
+        units:
+            converter.selectedCategory.units.map((unit) => unit.name).toSet(),
       );
 
   @override
