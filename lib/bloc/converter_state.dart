@@ -20,7 +20,7 @@ class InputState extends ConverterState {
     @required String unit,
     @required this.units,
     @required String value,
-  }) : super(value, unit);
+  }) : super(value, unit, [categoryIndex, categories, unit, units, value]);
 
   factory InputState.initial({
     @required Set<String> categories,
@@ -59,5 +59,5 @@ class ResultState extends ConverterState {
     @required String value,
     @required String unit,
     @required this.results,
-  }) : super(value, unit);
+  }) : super(value, unit, [value, unit, results]);
 }
