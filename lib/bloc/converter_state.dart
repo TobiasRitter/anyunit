@@ -52,13 +52,6 @@ class InputState extends ConverterState {
   }
 }
 
-class LoadingState extends ConverterState {
-  LoadingState({
-    @required String value,
-    @required String unit,
-  }) : super(value, unit);
-}
-
 class ResultState extends ConverterState {
   final Map<String, String> results;
 

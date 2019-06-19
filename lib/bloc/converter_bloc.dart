@@ -59,10 +59,6 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
           .firstWhere((unit) => unit.name == event.unit);
       yield (currentState as InputState).copyWith(unit: event.unit);
     } else if (event is StartConversionEvent) {
-      yield LoadingState(
-        value: event.value,
-        unit: converter.selectedUnit.name,
-      );
       yield ResultState(
         value: event.value,
         unit: converter.selectedUnit.name,
