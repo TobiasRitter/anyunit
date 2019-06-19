@@ -9,10 +9,10 @@ abstract class ConverterEvent extends Equatable {
 
 /// gets raised whenever the unit is changed
 class UnitChangedEvent extends ConverterEvent {
-  final int unitIndex;
+  final String unit;
 
   UnitChangedEvent({
-    @required this.unitIndex,
+    @required this.unit,
   });
 }
 

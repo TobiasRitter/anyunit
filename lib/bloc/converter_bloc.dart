@@ -12,6 +12,11 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
         name: "Weight",
         units: <Unit>{
           Unit(
+            name: "g",
+            getConvertedValue: (val) => val,
+            getStandardizedValue: (val) => val,
+          ),
+          Unit(
             name: "kg",
             getConvertedValue: (val) => val / 1000,
             getStandardizedValue: (val) => val * 1000,
@@ -45,7 +50,7 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
     ConverterEvent event,
   ) async* {
     if (event is UnitChangedEvent) {
-      yield (currentState as InputState).copyWith(unitIndex: event.unitIndex);
+      yield (currentState as InputState).copyWith(unit: event.unit);
     } else if (event is StartConversionEvent) {
       yield LoadingState(
         value: event.value,

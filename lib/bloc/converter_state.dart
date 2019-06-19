@@ -11,17 +11,16 @@ abstract class ConverterState extends Equatable {
 
 class InputState extends ConverterState {
   final int categoryIndex;
-  final int unitIndex;
   final Set<String> categories;
   final Set<String> units;
 
   InputState({
     @required this.categoryIndex,
-    @required this.unitIndex,
     @required this.categories,
+    @required String unit,
     @required this.units,
     @required String value,
-  }) : super(value, units.elementAt(unitIndex));
+  }) : super(value, unit);
 
   factory InputState.initial({
     @required Set<String> categories,
@@ -30,22 +29,22 @@ class InputState extends ConverterState {
     return InputState(
       value: "0.0",
       categoryIndex: 0,
-      unitIndex: 0,
       categories: categories,
+      unit: units.elementAt(0),
       units: units,
     );
   }
 
   InputState copyWith({
     int categoryIndex,
-    int unitIndex,
     Set<String> categories,
+    String unit,
     Set<String> units,
     String value,
   }) {
     return InputState(
       value: value ?? this.value,
-      unitIndex: unitIndex ?? this.unitIndex,
+      unit: unit ?? this.unit,
       categoryIndex: categoryIndex ?? this.categoryIndex,
       units: units ?? this.units,
       categories: categories ?? this.categories,
