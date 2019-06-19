@@ -3,38 +3,52 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class ConverterState extends Equatable {
-  ConverterState(this.value, this.category, this.unit, [List props = const []])
-      : super(props);
+  ConverterState(this.value, this.unit, [List props = const []]) : super(props);
 
   final String value;
-  final int category;
-  final int unit;
+  final String unit;
 }
 
 class InputState extends ConverterState {
-  InputState({
-    @required String value,
-    @required int category,
-    @required int unit,
-  }) : super(value, category, unit);
+  final int categoryIndex;
+  final int unitIndex;
+  final Set<String> categories;
+  final Set<String> units;
 
-  factory InputState.initial() {
+  InputState({
+    @required this.categoryIndex,
+    @required this.unitIndex,
+    @required this.categories,
+    @required this.units,
+    @required String value,
+  }) : super(value, units.elementAt(unitIndex));
+
+  factory InputState.initial({
+    @required Set<String> categories,
+    @required Set<String> units,
+  }) {
     return InputState(
       value: "0.0",
-      category: 0,
-      unit: 0,
+      categoryIndex: 0,
+      unitIndex: 0,
+      categories: categories,
+      units: units,
     );
   }
 
   InputState copyWith({
-    double value,
-    int category,
-    int unit,
+    int categoryIndex,
+    int unitIndex,
+    Set<String> categories,
+    Set<String> units,
+    String value,
   }) {
     return InputState(
       value: value ?? this.value,
-      category: category ?? this.category,
-      unit: unit ?? this.unit,
+      unitIndex: unitIndex ?? this.unitIndex,
+      categoryIndex: categoryIndex ?? this.categoryIndex,
+      units: units ?? this.units,
+      categories: categories ?? this.categories,
     );
   }
 }
@@ -42,18 +56,16 @@ class InputState extends ConverterState {
 class LoadingState extends ConverterState {
   LoadingState({
     @required String value,
-    @required int category,
-    @required int unit,
-  }) : super(value, category, unit);
+    @required String unit,
+  }) : super(value, unit);
 }
 
 class ResultState extends ConverterState {
-  final Map<String, dynamic> results;
+  final Map<String, String> results;
 
   ResultState({
     @required String value,
-    @required int category,
-    @required int unit,
+    @required String unit,
     @required this.results,
-  }) : super(value, category, unit);
+  }) : super(value, unit);
 }

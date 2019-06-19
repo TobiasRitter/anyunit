@@ -43,6 +43,26 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (BuildContext context, ConverterState state) {
         return (state is InputState)
             ? Scaffold(
+                bottomNavigationBar: BottomNavigationBar(
+                  items: <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.fitness_center,
+                      ),
+                      title: Text(
+                        state.categories.elementAt(0),
+                      ),
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.ac_unit,
+                      ),
+                      title: Text(
+                        state.categories.elementAt(1),
+                      ),
+                    ),
+                  ],
+                ),
                 body: Column(
                   children: <Widget>[
                     Expanded(

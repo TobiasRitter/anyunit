@@ -9,10 +9,10 @@ abstract class ConverterEvent extends Equatable {
 
 /// gets raised whenever the unit is changed
 class UnitChangedEvent extends ConverterEvent {
-  final int unit;
+  final int unitIndex;
 
   UnitChangedEvent({
-    @required this.unit,
+    @required this.unitIndex,
   });
 }
 
@@ -27,10 +27,10 @@ class StartConversionEvent extends ConverterEvent {
 
 /// gets raised whenever the unit category is changed
 class CategoryChangedEvent extends ConverterEvent {
-  final int category;
+  final int categoryIndex;
 
   CategoryChangedEvent({
-    @required this.category,
+    @required this.categoryIndex,
   });
 }
 
