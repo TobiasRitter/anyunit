@@ -72,13 +72,7 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
       yield (currentState as InputState)
           .copyWith(categoryIndex: event.categoryIndex);
     } else if (event is BackToInputEvent) {
-      yield InputState.initial(
-        categories: converter.categories
-            .map<String>((category) => category.name)
-            .toSet(),
-        units:
-            converter.selectedCategory.units.map((unit) => unit.name).toSet(),
-      );
+      yield initialState;
     }
   }
 }

@@ -112,7 +112,7 @@ void main() {
             e.message == "at least one category needed")));
   });
 
-  test("value to convert has to be a int or double", () {
+  test("value must be an int, double or properly formatted string", () {
     Unit celcius = Unit(
         name: "celcius",
         getConvertedValue: (val) => val - 273.15,
@@ -136,5 +136,29 @@ void main() {
         throwsA(predicate((e) =>
             e is ArgumentError &&
             e.message == "value is no valid int or double")));
+  });
+
+  test("value can be int, double or properly formatted string", () {
+    Unit celcius = Unit(
+        name: "celcius",
+        getConvertedValue: (val) => val - 273.15,
+        getStandardizedValue: (val) => val + 273.15);
+
+    Category temperature = Category(
+      name: "temperature",
+      units: {
+        celcius,
+      },
+    );
+
+    Converter converter = Converter(
+      categories: {
+        temperature,
+      },
+    );
+
+    converter.convert(originalValue: 20);
+    converter.convert(originalValue: 20.0);
+    converter.convert(originalValue: "20");
   });
 }

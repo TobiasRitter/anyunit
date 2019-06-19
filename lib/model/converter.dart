@@ -38,14 +38,14 @@ class Converter {
     }
 
     // try to convert the given value into a double
-    if (originalValue is! int && originalValue is! double) {
+    double parsedValue = double.tryParse(originalValue.toString());
+    if (parsedValue == null) {
       throw ArgumentError("value is no valid int or double");
     }
 
     Map<String, String> results = Map();
     // use the standardized value for the calculation
-    dynamic standardizedValue =
-        selectedUnit.getStandardizedValue(originalValue.toDouble());
+    dynamic standardizedValue = selectedUnit.getStandardizedValue(parsedValue);
 
     for (Unit unit in selectedCategory.units) {
       // convert into all units of the same category
