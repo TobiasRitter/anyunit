@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.redAccent,
         accentColor: Colors.redAccent,
       ),
-      home: MyHomePage(title: 'AnyUnit'),
+      home: BlocProvider(
+        builder: (context) => ConverterBloc(),
+        child: MyHomePage(title: 'AnyUnit'),
+      ),
     );
   }
 }
@@ -34,10 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController valueController = TextEditingController();
 
   /// bloc for the unit conversion
-  final ConverterBloc bloc = ConverterBloc();
+  ConverterBloc bloc;
 
   @override
   void initState() {
+    bloc = BlocProvider.of<ConverterBloc>(context);
     super.initState();
     valueController
         .addListener(() => bloc.onValueChanged(valueController.text));
