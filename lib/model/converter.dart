@@ -7,8 +7,6 @@ class Converter {
   /// set of all known unit categories
   final Set<Category> categories;
 
-  // TODO: move to bloc
-
   /// the currently selected category
   Category _selectedCategory;
 

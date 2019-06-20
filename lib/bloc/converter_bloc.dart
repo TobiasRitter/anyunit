@@ -76,6 +76,7 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
             converter.selectedCategory.units.map((unit) => unit.name).toSet(),
       );
     } else if (event is BackPressedEvent) {
+      converter.selectedCategory = converter.categories.elementAt(0);
       yield initialState;
     } else if (event is ValueChangedEvent) {
       converter.value = double.parse(event.value);
