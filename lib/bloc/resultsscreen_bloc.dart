@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:anyunit/bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import './bloc.dart';
 
 class ResultsScreenBloc extends Bloc<ResultsScreenEvent, ResultsScreenState> {
   final String value;
