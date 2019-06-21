@@ -3,9 +3,10 @@ import 'package:anyunit/model/category.dart';
 import 'package:anyunit/model/converter.dart';
 import 'package:anyunit/model/unit.dart';
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
 import './bloc.dart';
 
-class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
+class InputScreenBloc extends Bloc<InputScreenEvent, InputState> {
   Converter converter = Converter(
     categories: <Category>{
       Category(
@@ -42,7 +43,7 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
   );
 
   @override
-  ConverterState get initialState => InputState.initial(
+  InputState get initialState => InputState.initial(
         categories: converter.categories
             .map<String>((category) => category.name)
             .toSet(),
@@ -51,36 +52,27 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
       );
 
   @override
-  Stream<ConverterState> mapEventToState(
-    ConverterEvent event,
+  Stream<InputState> mapEventToState(
+    InputScreenEvent event,
   ) async* {
     if (event is UnitChangedEvent) {
       converter.selectedUnit = converter.selectedCategory.units
           .firstWhere((unit) => unit.name == event.unit);
-      yield (currentState as InputState).copyWith(
+      yield currentState.copyWith(
         unit: event.unit,
-      );
-    } else if (event is ConvertPressedEvent) {
-      yield ResultState(
-        value: converter.value.toString(),
-        unit: converter.selectedUnit.name,
-        results: converter.convert(),
       );
     } else if (event is CategoryChangedEvent) {
       converter.selectedCategory =
           converter.categories.elementAt(event.categoryIndex);
-      yield (currentState as InputState).copyWith(
+      yield currentState.copyWith(
         categoryIndex: event.categoryIndex,
         unit: converter.selectedUnit.name,
         units:
             converter.selectedCategory.units.map((unit) => unit.name).toSet(),
       );
-    } else if (event is BackPressedEvent) {
-      converter.selectedCategory = converter.categories.elementAt(0);
-      yield initialState;
     } else if (event is ValueChangedEvent) {
       converter.value = double.parse(event.value);
-      yield (currentState as InputState).copyWith(
+      yield currentState.copyWith(
         value: converter.value.toString(),
       );
     }
@@ -88,13 +80,28 @@ class ConverterBloc extends Bloc<ConverterEvent, ConverterState> {
 
   void onUnitChanged(String unit) => dispatch(UnitChangedEvent(unit: unit));
 
-  void onConvertPressed() => dispatch(ConvertPressedEvent());
-
   void onCategoryChanged(int categoryIndex) =>
       dispatch(CategoryChangedEvent(categoryIndex: categoryIndex));
 
-  void onBackPressed() => dispatch(BackPressedEvent());
-
   void onValueChanged(String value) =>
       dispatch(ValueChangedEvent(value: value));
+}
+
+class ResultsScreenBloc extends Bloc<ResultsScreenEvent, ResultsState> {
+  final String value;
+  final String unit;
+  final Map<String, String> results;
+
+  ResultsScreenBloc({
+    @required this.value,
+    @required this.unit,
+    @required this.results,
+  });
+
+  @override
+  ResultsState get initialState =>
+      ResultsState(unit: unit, value: value, results: results);
+
+  @override
+  Stream<ResultsState> mapEventToState(ResultsScreenEvent event) async* {}
 }

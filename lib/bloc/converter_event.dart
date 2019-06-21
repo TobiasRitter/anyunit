@@ -3,12 +3,12 @@ import 'package:meta/meta.dart';
 
 /// abstract class for a converter event
 @immutable
-abstract class ConverterEvent extends Equatable {
-  ConverterEvent([List props = const []]) : super(props);
+abstract class InputScreenEvent extends Equatable {
+  InputScreenEvent([List props = const []]) : super(props);
 }
 
 /// gets raised whenever the unit is changed
-class UnitChangedEvent extends ConverterEvent {
+class UnitChangedEvent extends InputScreenEvent {
   final String unit;
 
   UnitChangedEvent({
@@ -16,11 +16,8 @@ class UnitChangedEvent extends ConverterEvent {
   });
 }
 
-/// gets raised whenever the convert button is pressed
-class ConvertPressedEvent extends ConverterEvent {}
-
 /// gets raised whenever the unit category is changed
-class CategoryChangedEvent extends ConverterEvent {
+class CategoryChangedEvent extends InputScreenEvent {
   final int categoryIndex;
 
   CategoryChangedEvent({
@@ -28,14 +25,16 @@ class CategoryChangedEvent extends ConverterEvent {
   });
 }
 
-/// gets raised whenever the back button is pressed
-class BackPressedEvent extends ConverterEvent {}
-
 /// gets raised whenever the value to convert changes
-class ValueChangedEvent extends ConverterEvent {
+class ValueChangedEvent extends InputScreenEvent {
   final String value;
 
   ValueChangedEvent({
     @required this.value,
   });
+}
+
+@immutable
+abstract class ResultsScreenEvent extends Equatable {
+  ResultsScreenEvent([List props = const []]) : super(props);
 }

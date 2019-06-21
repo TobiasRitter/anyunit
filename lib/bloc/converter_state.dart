@@ -2,25 +2,20 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-abstract class ConverterState extends Equatable {
-  ConverterState(this.value, this.unit, [List props = const []]) : super(props);
-
+class InputState extends Equatable {
   final String value;
   final String unit;
-}
-
-class InputState extends ConverterState {
   final int categoryIndex;
   final Set<String> categories;
   final Set<String> units;
 
   InputState({
+    @required this.unit,
+    @required this.value,
     @required this.categoryIndex,
     @required this.categories,
-    @required String unit,
     @required this.units,
-    @required String value,
-  }) : super(value, unit, [categoryIndex, categories, unit, units, value]);
+  }) : super([categoryIndex, categories, unit, units, value]);
 
   factory InputState.initial({
     @required Set<String> categories,
@@ -52,12 +47,15 @@ class InputState extends ConverterState {
   }
 }
 
-class ResultState extends ConverterState {
+@immutable
+class ResultsState extends Equatable {
+  final String value;
+  final String unit;
   final Map<String, String> results;
 
-  ResultState({
-    @required String value,
-    @required String unit,
+  ResultsState({
+    @required this.value,
+    @required this.unit,
     @required this.results,
-  }) : super(value, unit, [value, unit, results]);
+  }) : super([value, unit, results]);
 }
