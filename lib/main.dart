@@ -94,7 +94,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: bloc,
-      builder: (BuildContext context, ResultsState state) {
+      builder: (BuildContext context, ResultsScreenState state) {
         return Scaffold(
           appBar: AppBar(
             centerTitle: true,
@@ -153,7 +153,7 @@ class _InputScreenState extends State<InputScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: bloc,
-      builder: (BuildContext context, InputState state) {
+      builder: (BuildContext context, InputScreenState state) {
         valueController.text = state.value;
         return Scaffold(
           bottomNavigationBar: BottomNavigationBar(

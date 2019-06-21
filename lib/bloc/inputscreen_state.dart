@@ -2,14 +2,14 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class InputState extends Equatable {
+class InputScreenState extends Equatable {
   final String value;
   final String unit;
   final int categoryIndex;
   final Set<String> categories;
   final Set<String> units;
 
-  InputState({
+  InputScreenState({
     @required this.unit,
     @required this.value,
     @required this.categoryIndex,
@@ -17,11 +17,11 @@ class InputState extends Equatable {
     @required this.units,
   }) : super([categoryIndex, categories, unit, units, value]);
 
-  factory InputState.initial({
+  factory InputScreenState.initial({
     @required Set<String> categories,
     @required Set<String> units,
   }) {
-    return InputState(
+    return InputScreenState(
       value: "0",
       categoryIndex: 0,
       categories: categories,
@@ -30,14 +30,14 @@ class InputState extends Equatable {
     );
   }
 
-  InputState copyWith({
+  InputScreenState copyWith({
     int categoryIndex,
     Set<String> categories,
     String unit,
     Set<String> units,
     String value,
   }) {
-    return InputState(
+    return InputScreenState(
       value: value ?? this.value,
       unit: unit ?? this.unit,
       categoryIndex: categoryIndex ?? this.categoryIndex,
@@ -45,17 +45,4 @@ class InputState extends Equatable {
       categories: categories ?? this.categories,
     );
   }
-}
-
-@immutable
-class ResultsState extends Equatable {
-  final String value;
-  final String unit;
-  final Map<String, String> results;
-
-  ResultsState({
-    @required this.value,
-    @required this.unit,
-    @required this.results,
-  }) : super([value, unit, results]);
 }

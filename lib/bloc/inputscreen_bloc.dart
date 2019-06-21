@@ -3,10 +3,10 @@ import 'package:anyunit/model/category.dart';
 import 'package:anyunit/model/converter.dart';
 import 'package:anyunit/model/unit.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
-import './bloc.dart';
+import 'inputscreen_event.dart';
+import 'inputscreen_state.dart';
 
-class InputScreenBloc extends Bloc<InputScreenEvent, InputState> {
+class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
   Converter converter = Converter(
     categories: <Category>{
       Category(
@@ -43,7 +43,7 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputState> {
   );
 
   @override
-  InputState get initialState => InputState.initial(
+  InputScreenState get initialState => InputScreenState.initial(
         categories: converter.categories
             .map<String>((category) => category.name)
             .toSet(),
@@ -52,7 +52,7 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputState> {
       );
 
   @override
-  Stream<InputState> mapEventToState(
+  Stream<InputScreenState> mapEventToState(
     InputScreenEvent event,
   ) async* {
     if (event is UnitChangedEvent) {
@@ -85,23 +85,4 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputState> {
 
   void onValueChanged(String value) =>
       dispatch(ValueChangedEvent(value: value));
-}
-
-class ResultsScreenBloc extends Bloc<ResultsScreenEvent, ResultsState> {
-  final String value;
-  final String unit;
-  final Map<String, String> results;
-
-  ResultsScreenBloc({
-    @required this.value,
-    @required this.unit,
-    @required this.results,
-  });
-
-  @override
-  ResultsState get initialState =>
-      ResultsState(unit: unit, value: value, results: results);
-
-  @override
-  Stream<ResultsState> mapEventToState(ResultsScreenEvent event) async* {}
 }

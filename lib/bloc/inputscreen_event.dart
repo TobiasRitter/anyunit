@@ -33,8 +33,3 @@ class ValueChangedEvent extends InputScreenEvent {
     @required this.value,
   });
 }
-
-@immutable
-abstract class ResultsScreenEvent extends Equatable {
-  ResultsScreenEvent([List props = const []]) : super(props);
-}
