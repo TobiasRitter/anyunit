@@ -13,8 +13,6 @@ class Converter {
   /// the currently selected unit
   Unit _selectedUnit;
 
-  double value = 0;
-
   Category get selectedCategory => _selectedCategory;
 
   set selectedCategory(Category category) {
@@ -50,7 +48,7 @@ class Converter {
   }
 
   /// returns a map of unit names with their converted values
-  Map<String, String> convert() {
+  Map<String, String> convert(double value) {
     // try to convert the given value into a double
     double parsedValue = double.tryParse(value.toString());
     if (parsedValue == null) {

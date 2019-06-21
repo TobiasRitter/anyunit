@@ -18,8 +18,6 @@ class _InputScreenState extends State<InputScreen> {
   @override
   void initState() {
     super.initState();
-    valueController
-        .addListener(() => bloc.onValueChanged(valueController.text));
   }
 
   /// dispose controller and bloc
@@ -104,7 +102,8 @@ class _InputScreenState extends State<InputScreen> {
                   builder: (context) => ResultsScreen(
                         value: valueController.text,
                         unit: bloc.converter.selectedUnit.name,
-                        results: bloc.converter.convert(),
+                        results: bloc.converter
+                            .convert(double.parse(valueController.text)),
                       ),
                 ),
               );

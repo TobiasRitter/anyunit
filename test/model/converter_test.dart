@@ -26,8 +26,7 @@ void main() {
       categories: {temperatures},
     );
 
-    tempConverter.value = 20;
-    Map<String, String> conversionResults = tempConverter.convert();
+    Map<String, String> conversionResults = tempConverter.convert(20);
     expect(conversionResults.length, 1);
     expect(conversionResults.containsValue("68.0"), true);
   });
@@ -54,7 +53,7 @@ void main() {
       categories: {temperatures},
     );
 
-    Map conversionResults = tempConverter.convert();
+    Map conversionResults = tempConverter.convert(20);
     expect(conversionResults.length, 0);
   });
 

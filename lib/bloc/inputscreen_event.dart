@@ -24,12 +24,3 @@ class CategoryChangedEvent extends InputScreenEvent {
     @required this.categoryIndex,
   });
 }
-
-/// gets raised whenever the value to convert changes
-class ValueChangedEvent extends InputScreenEvent {
-  final String value;
-
-  ValueChangedEvent({
-    @required this.value,
-  });
-}

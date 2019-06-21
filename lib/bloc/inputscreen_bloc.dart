@@ -70,11 +70,6 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
         units:
             converter.selectedCategory.units.map((unit) => unit.name).toSet(),
       );
-    } else if (event is ValueChangedEvent) {
-      converter.value = double.parse(event.value);
-      yield currentState.copyWith(
-        value: converter.value.toString(),
-      );
     }
   }
 
@@ -82,7 +77,4 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
 
   void onCategoryChanged(int categoryIndex) =>
       dispatch(CategoryChangedEvent(categoryIndex: categoryIndex));
-
-  void onValueChanged(String value) =>
-      dispatch(ValueChangedEvent(value: value));
 }
