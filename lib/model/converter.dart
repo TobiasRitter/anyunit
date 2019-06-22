@@ -1,54 +1,101 @@
 import 'package:cleverconvert/model/category.dart';
 import 'package:cleverconvert/model/unit.dart';
-import 'package:meta/meta.dart';
 
 /// a basic unit converter
 class Converter {
   /// set of all known unit categories
-  final Set<Category> categories;
+  static final Set<Category> _categories = <Category>{
+    Category(
+      name: "Weight",
+      units: <Unit>{
+        Unit(
+          name: "g",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+        Unit(
+          name: "kg",
+          getConvertedValue: (val) => val / 1000,
+          getStandardizedValue: (val) => val * 1000,
+        ),
+        Unit(
+          name: "lbs",
+          getConvertedValue: (val) => val / 2205,
+          getStandardizedValue: (val) => val * 2205,
+        ),
+      },
+    ),
+    Category(
+      name: "Temperature",
+      units: <Unit>{
+        Unit(
+          name: "kelvin",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+        Unit(
+          name: "celcius",
+          getConvertedValue: (val) => val - 273.15,
+          getStandardizedValue: (val) => val + 273.15,
+        ),
+        Unit(
+          name: "fahrenheit",
+          getConvertedValue: (val) => (val - 273.15) * 9 / 5 + 32,
+          getStandardizedValue: (val) => (val - 32) * 5 / 9 + 273.15,
+        ),
+      },
+    ),
+    Category(
+      name: "Distance",
+      units: <Unit>{
+        Unit(
+          name: "m",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+        Unit(
+          name: "cm",
+          getConvertedValue: (val) => val * 100,
+          getStandardizedValue: (val) => val / 100,
+        ),
+        Unit(
+          name: "km",
+          getConvertedValue: (val) => val / 1000,
+          getStandardizedValue: (val) => val * 1000,
+        ),
+      },
+    )
+  };
+
+  static Set<Category> get categories => _categories;
 
   /// the currently selected category
-  Category _selectedCategory;
+  static Category _selectedCategory = _categories.elementAt(0);
 
   /// the currently selected unit
-  Unit _selectedUnit;
+  static Unit _selectedUnit = selectedCategory.units.elementAt(0);
 
-  Category get selectedCategory => _selectedCategory;
+  static Category get selectedCategory => _selectedCategory;
 
-  set selectedCategory(Category category) {
-    if (!categories.contains(category)) {
+  static set selectedCategory(Category category) {
+    if (!_categories.contains(category)) {
       throw ArgumentError("unknown category");
     }
     _selectedCategory = category;
     _selectedUnit = _selectedCategory.units.elementAt(0);
   }
 
-  Unit get selectedUnit => _selectedUnit;
+  static Unit get selectedUnit => _selectedUnit;
 
-  set selectedUnit(Unit unit) {
+  static set selectedUnit(Unit unit) {
     if (!_selectedCategory.units.contains(unit)) {
       throw ArgumentError("unit is not in the selected category");
     }
     _selectedUnit = unit;
   }
 
-  /// creates a new converter with the given categories
-  Converter({
-    @required this.categories,
-  }) {
-    // check that categories is not empty
-    if (categories.length == 0) {
-      throw ArgumentError("at least one category needed");
-    }
-    // select the first category by default
-    selectedCategory = categories.elementAt(0);
-
-    // select the first unit by default
-    selectedUnit = selectedCategory.units.elementAt(0);
-  }
-
   /// returns a map of unit names with their converted values
-  Map<String, String> convert(double value) {
+  static Map<String, String> convert(double value) {
     // try to convert the given value into a double
     double parsedValue = double.tryParse(value.toString());
     if (parsedValue == null) {

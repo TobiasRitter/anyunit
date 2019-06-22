@@ -1,4 +1,5 @@
 import 'package:cleverconvert/bloc/bloc.dart';
+import 'package:cleverconvert/model/converter.dart';
 import 'package:cleverconvert/view/resultsscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -121,9 +122,9 @@ class _InputScreenState extends State<InputScreen> {
                   MaterialPageRoute(
                     builder: (context) => ResultsScreen(
                           value: valueController.text,
-                          unit: bloc.converter.selectedUnit.name,
-                          results: bloc.converter
-                              .convert(double.parse(valueController.text)),
+                          unit: Converter.selectedUnit.name,
+                          results: Converter.convert(
+                              double.parse(valueController.text)),
                         ),
                   ),
                 );
