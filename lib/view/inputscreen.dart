@@ -30,117 +30,114 @@ class _InputScreenState extends State<InputScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: bloc,
-      builder: (BuildContext context, InputScreenState state) {
-        valueController.text = state.value;
-        return Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.info_outline,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LicensePage(
-                            applicationName: "Bloc",
-                            applicationLegalese: "blah",
-                            applicationVersion: "0.16.0",
-                          ),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            selectedItemColor: Theme.of(context).accentColor,
-            onTap: bloc.onCategoryChanged,
-            currentIndex: state.categoryIndex,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.fitness_center,
-                ),
-                title: Text(
-                  state.categories.elementAt(0),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.ac_unit,
-                ),
-                title: Text(
-                  state.categories.elementAt(1),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.directions_walk,
-                ),
-                title: Text(
-                  state.categories.elementAt(2),
-                ),
-              ),
-            ],
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextField(
-                style: TextStyle(
-                  color: Theme.of(context).accentColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 128,
-                ),
-                autofocus: true,
-                controller: valueController,
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration.collapsed(
-                  hintText: "Enter a value",
-                ),
-              ),
-              DropdownButton(
-                underline: Container(),
-                value: state.unit,
-                onChanged: bloc.onUnitChanged,
-                items: state.units
-                    .map((unit) => DropdownMenuItem<String>(
-                          value: unit,
-                          child: Text(unit),
-                        ))
-                    .toList(),
-              )
-            ],
-          ),
-          floatingActionButton: FloatingActionButton.extended(
-            label: Text(
-              "CONVERT",
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ResultsScreen(
-                        value: valueController.text,
-                        unit: bloc.converter.selectedUnit.name,
-                        results: bloc.converter
-                            .convert(double.parse(valueController.text)),
+    return BlocProvider(
+      builder: (context) => InputScreenBloc(),
+      child: BlocBuilder(
+        bloc: bloc,
+        builder: (BuildContext context, InputScreenState state) {
+          valueController.text = state.value;
+          return Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(
+                    Icons.info_outline,
+                  ),
+                  onPressed: () => showLicensePage(
+                        context: context,
+                        applicationName: "Bloc",
+                        applicationVersion: "0.16.0",
+                        applicationLegalese: "blah",
                       ),
                 ),
-              );
-            },
-            icon: Icon(
-              Icons.arrow_forward,
+              ],
             ),
-          ),
-        );
-      },
+            bottomNavigationBar: BottomNavigationBar(
+              selectedItemColor: Theme.of(context).accentColor,
+              onTap: bloc.onCategoryChanged,
+              currentIndex: state.categoryIndex,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.fitness_center,
+                  ),
+                  title: Text(
+                    state.categories.elementAt(0),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.ac_unit,
+                  ),
+                  title: Text(
+                    state.categories.elementAt(1),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.directions_walk,
+                  ),
+                  title: Text(
+                    state.categories.elementAt(2),
+                  ),
+                ),
+              ],
+            ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextField(
+                  style: TextStyle(
+                    color: Theme.of(context).accentColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 128,
+                  ),
+                  autofocus: true,
+                  controller: valueController,
+                  keyboardType: TextInputType.number,
+                  textAlign: TextAlign.center,
+                  decoration: InputDecoration.collapsed(
+                    hintText: "Enter a value",
+                  ),
+                ),
+                DropdownButton(
+                  underline: Container(),
+                  value: state.unit,
+                  onChanged: bloc.onUnitChanged,
+                  items: state.units
+                      .map((unit) => DropdownMenuItem<String>(
+                            value: unit,
+                            child: Text(unit),
+                          ))
+                      .toList(),
+                )
+              ],
+            ),
+            floatingActionButton: FloatingActionButton.extended(
+              label: Text(
+                "CONVERT",
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResultsScreen(
+                          value: valueController.text,
+                          unit: bloc.converter.selectedUnit.name,
+                          results: bloc.converter
+                              .convert(double.parse(valueController.text)),
+                        ),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.arrow_forward,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
