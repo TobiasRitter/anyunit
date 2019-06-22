@@ -46,9 +46,6 @@ class _InputScreenState extends State<InputScreen> {
                   ),
                   onPressed: () => showLicensePage(
                         context: context,
-                        applicationName: "Bloc",
-                        applicationVersion: "0.16.0",
-                        applicationLegalese: "blah",
                       ),
                 ),
               ],
