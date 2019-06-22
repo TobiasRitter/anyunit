@@ -63,6 +63,16 @@ class Converter {
           getConvertedValue: (val) => val / 1000,
           getStandardizedValue: (val) => val * 1000,
         ),
+        Unit(
+          name: "mile",
+          getConvertedValue: (val) => val / 1609.344,
+          getStandardizedValue: (val) => val * 1609.344,
+        ),
+        Unit(
+          name: "in",
+          getConvertedValue: (val) => val * 39.37,
+          getStandardizedValue: (val) => val / 39.37,
+        ),
       },
     )
   };
