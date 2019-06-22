@@ -74,6 +74,14 @@ class _InputScreenState extends State<InputScreen> {
                   state.categories.elementAt(1),
                 ),
               ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.directions_walk,
+                ),
+                title: Text(
+                  state.categories.elementAt(2),
+                ),
+              ),
             ],
           ),
           body: Column(

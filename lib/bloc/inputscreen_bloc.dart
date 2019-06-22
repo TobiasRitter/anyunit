@@ -8,39 +8,71 @@ import 'package:bloc/bloc.dart';
 
 /// bloc for the input page
 class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
+  static Set<Category> categorySet = <Category>{
+    Category(
+      name: "Weight",
+      units: <Unit>{
+        Unit(
+          name: "g",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+        Unit(
+          name: "kg",
+          getConvertedValue: (val) => val / 1000,
+          getStandardizedValue: (val) => val * 1000,
+        ),
+        Unit(
+          name: "lbs",
+          getConvertedValue: (val) => val / 2205,
+          getStandardizedValue: (val) => val * 2205,
+        ),
+      },
+    ),
+    Category(
+      name: "Temperature",
+      units: <Unit>{
+        Unit(
+          name: "kelvin",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+        Unit(
+          name: "celcius",
+          getConvertedValue: (val) => val - 273.15,
+          getStandardizedValue: (val) => val + 273.15,
+        ),
+        Unit(
+          name: "fahrenheit",
+          getConvertedValue: (val) => (val - 273.15) * 9 / 5 + 32,
+          getStandardizedValue: (val) => (val - 32) * 5 / 9 + 273.15,
+        ),
+      },
+    ),
+    Category(
+      name: "Distance",
+      units: <Unit>{
+        Unit(
+          name: "m",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+        Unit(
+          name: "cm",
+          getConvertedValue: (val) => val * 100,
+          getStandardizedValue: (val) => val / 100,
+        ),
+        Unit(
+          name: "km",
+          getConvertedValue: (val) => val / 1000,
+          getStandardizedValue: (val) => val * 1000,
+        ),
+      },
+    )
+  };
+
   Converter converter = Converter(
-    categories: <Category>{
-      Category(
-        name: "Weight",
-        units: <Unit>{
-          Unit(
-            name: "g",
-            getConvertedValue: (val) => val,
-            getStandardizedValue: (val) => val,
-          ),
-          Unit(
-            name: "kg",
-            getConvertedValue: (val) => val / 1000,
-            getStandardizedValue: (val) => val * 1000,
-          ),
-        },
-      ),
-      Category(
-        name: "Temperature",
-        units: <Unit>{
-          Unit(
-            name: "celcius",
-            getConvertedValue: (val) => val - 273.15,
-            getStandardizedValue: (val) => val + 273.15,
-          ),
-          Unit(
-            name: "fahrenheit",
-            getConvertedValue: (val) => (val - 273.15) * 9 / 5 + 32,
-            getStandardizedValue: (val) => (val - 32) * 5 / 9 + 273.15,
-          ),
-        },
-      ),
-    },
+    categories: categorySet,
   );
 
   @override
