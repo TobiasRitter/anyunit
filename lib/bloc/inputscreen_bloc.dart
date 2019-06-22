@@ -6,6 +6,7 @@ import 'package:anyunit/model/converter.dart';
 import 'package:anyunit/model/unit.dart';
 import 'package:bloc/bloc.dart';
 
+/// bloc for the input page
 class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
   Converter converter = Converter(
     categories: <Category>{
@@ -73,8 +74,10 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
     }
   }
 
+  /// gets called whenever the unit in the view changes
   void onUnitChanged(String unit) => dispatch(UnitChangedEvent(unit: unit));
 
+  /// gets called whenever the category in the view changes
   void onCategoryChanged(int categoryIndex) =>
       dispatch(CategoryChangedEvent(categoryIndex: categoryIndex));
 }

@@ -3,6 +3,7 @@ import 'package:anyunit/bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
+/// bloc for the results page
 class ResultsScreenBloc extends Bloc<ResultsScreenEvent, ResultsScreenState> {
   final String value;
   final String unit;
