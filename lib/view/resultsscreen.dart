@@ -59,25 +59,30 @@ class _ResultsScreenState extends State<ResultsScreen> {
       bloc: bloc,
       builder: (BuildContext context, ResultsScreenState state) {
         return Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-            title: Text("${state.value} ${state.unit}"),
-          ),
-          body: ListView.builder(
-            itemCount: state.results.length,
-            itemBuilder: (BuildContext ctxt, int index) {
-              return ListTile(
-                title: Text(
-                  "${state.results.values.elementAt(index)} ${state.results.keys.elementAt(index)}",
+          body: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                expandedHeight: 200,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Text(
+                    "${state.value} ${state.unit}",
+                  ),
                 ),
-              );
-            },
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                  return (index < state.results.length)
+                      ? ListTile(
+                          title: Text(
+                            "${state.results.values.elementAt(index)} ${state.results.keys.elementAt(index)}",
+                          ),
+                        )
+                      : null;
+                }),
+              )
+            ],
           ),
         );
       },

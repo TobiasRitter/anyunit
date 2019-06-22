@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
       title: 'AnyUnit',
       theme: ThemeData(
         brightness: Brightness.light,
-        primaryColor: Colors.redAccent,
+        primaryColor: Colors.white,
+        canvasColor: Colors.white,
         accentColor: Colors.redAccent,
       ),
       home: BlocProvider(

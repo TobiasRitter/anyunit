@@ -35,7 +35,26 @@ class _InputScreenState extends State<InputScreen> {
       builder: (BuildContext context, InputScreenState state) {
         valueController.text = state.value;
         return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.info_outline,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LicensePage(),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
           bottomNavigationBar: BottomNavigationBar(
+            selectedItemColor: Theme.of(context).accentColor,
             onTap: bloc.onCategoryChanged,
             currentIndex: state.categoryIndex,
             items: <BottomNavigationBarItem>[
@@ -58,36 +77,32 @@ class _InputScreenState extends State<InputScreen> {
             ],
           ),
           body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                child: Container(
+              TextField(
+                style: TextStyle(
                   color: Theme.of(context).accentColor,
-                  child: Center(
-                    child: TextField(
-                      autofocus: true,
-                      controller: valueController,
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration.collapsed(
-                        hintText: "Enter a value",
-                      ),
-                    ),
-                  ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 128,
+                ),
+                autofocus: true,
+                controller: valueController,
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration.collapsed(
+                  hintText: "Enter a value",
                 ),
               ),
-              Expanded(
-                child: Center(
-                  child: DropdownButton(
-                    value: state.unit,
-                    onChanged: bloc.onUnitChanged,
-                    items: state.units
-                        .map((unit) => DropdownMenuItem<String>(
-                              value: unit,
-                              child: Text(unit),
-                            ))
-                        .toList(),
-                  ),
-                ),
+              DropdownButton(
+                underline: Container(),
+                value: state.unit,
+                onChanged: bloc.onUnitChanged,
+                items: state.units
+                    .map((unit) => DropdownMenuItem<String>(
+                          value: unit,
+                          child: Text(unit),
+                        ))
+                    .toList(),
               )
             ],
           ),
