@@ -1,4 +1,4 @@
-# AnyUnit
+# CleverConvert
 
 A unit converter app for your Android.
 

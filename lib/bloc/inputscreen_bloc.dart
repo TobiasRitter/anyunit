@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:anyunit/bloc/inputscreen_event.dart';
-import 'package:anyunit/bloc/inputscreen_state.dart';
-import 'package:anyunit/model/category.dart';
-import 'package:anyunit/model/converter.dart';
-import 'package:anyunit/model/unit.dart';
+import 'package:cleverconvert/bloc/inputscreen_event.dart';
+import 'package:cleverconvert/bloc/inputscreen_state.dart';
+import 'package:cleverconvert/model/category.dart';
+import 'package:cleverconvert/model/converter.dart';
+import 'package:cleverconvert/model/unit.dart';
 import 'package:bloc/bloc.dart';
 
 /// bloc for the input page

@@ -1,5 +1,5 @@
-import 'package:anyunit/model/category.dart';
-import 'package:anyunit/model/unit.dart';
+import 'package:cleverconvert/model/category.dart';
+import 'package:cleverconvert/model/unit.dart';
 import 'package:meta/meta.dart';
 
 /// a basic unit converter

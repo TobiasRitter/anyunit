@@ -1,4 +1,4 @@
-import 'package:anyunit/model/unit.dart';
+import 'package:cleverconvert/model/unit.dart';
 import 'package:meta/meta.dart';
 
 /// object containing a group of units of the same type
