@@ -46,7 +46,11 @@ class _InputScreenState extends State<InputScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LicensePage(),
+                      builder: (context) => LicensePage(
+                            applicationName: "Bloc",
+                            applicationLegalese: "blah",
+                            applicationVersion: "0.16.0",
+                          ),
                     ),
                   );
                 },
