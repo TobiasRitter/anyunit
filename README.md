@@ -12,7 +12,7 @@ To convert a value of a certain unit, just type it into the text field an a tabl
 
 ## Dependencies
 
-+ [Bloc](https://github.com/felangel/bloc/) fir Dart
-+ [Bloc](https://github.com/felangel/bloc/blob/master/packages/flutter_bloc/README.md) for Flutter
++ [Bloc for Dart](https://github.com/felangel/bloc/)
++ [Bloc for Flutter](https://github.com/felangel/bloc/blob/master/packages/flutter_bloc/README.md)
 + [Dart](https://dart.dev/)
 + [Flutter](https://flutter.dev/)
