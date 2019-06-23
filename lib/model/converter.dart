@@ -20,8 +20,8 @@ class Converter {
         ),
         Unit(
           name: "lbs",
-          getConvertedValue: (val) => val / 2205,
-          getStandardizedValue: (val) => val * 2205,
+          getConvertedValue: (val) => val / 453.592,
+          getStandardizedValue: (val) => val * 453.592,
         ),
       },
     ),
@@ -72,6 +72,16 @@ class Converter {
           name: "in",
           getConvertedValue: (val) => val * 39.37,
           getStandardizedValue: (val) => val / 39.37,
+        ),
+        Unit(
+          name: "ft",
+          getConvertedValue: (val) => val * 3.281,
+          getStandardizedValue: (val) => val / 3.281,
+        ),
+        Unit(
+          name: "yard",
+          getConvertedValue: (val) => val * 1.094,
+          getStandardizedValue: (val) => val / 1.094,
         ),
       },
     )
