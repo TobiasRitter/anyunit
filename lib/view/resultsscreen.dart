@@ -67,6 +67,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
                   centerTitle: true,
                   title: Text(
                     "${state.value} ${state.unit}",
+                    style: TextStyle(
+                      color: Theme.of(context).accentColor,
+                      fontSize: 32,
+                    ),
                   ),
                 ),
               ),
