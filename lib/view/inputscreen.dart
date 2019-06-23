@@ -19,6 +19,8 @@ class _InputScreenState extends State<InputScreen> {
   @override
   void initState() {
     super.initState();
+    // valueController.addListener(
+    //     () => bloc.onValueChanged(double.parse(valueController.text)));
   }
 
   /// dispose controller and bloc
@@ -86,6 +88,7 @@ class _InputScreenState extends State<InputScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextField(
+                  onChanged: bloc.onValueChanged,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold,
@@ -123,8 +126,7 @@ class _InputScreenState extends State<InputScreen> {
                     builder: (context) => ResultsScreen(
                           value: valueController.text,
                           unit: Converter.selectedUnit.name,
-                          results: Converter.convert(
-                              double.parse(valueController.text)),
+                          results: Converter.convert(),
                         ),
                   ),
                 );

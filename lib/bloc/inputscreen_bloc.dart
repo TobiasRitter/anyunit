@@ -34,6 +34,11 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
         units:
             Converter.selectedCategory.units.map((unit) => unit.name).toSet(),
       );
+    } else if (event is ValueChangedEvent) {
+      Converter.value = event.value;
+      yield currentState.copyWith(
+        value: event.value.toString(),
+      );
     }
   }
 
@@ -43,4 +48,8 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
   /// gets called whenever the category in the view changes
   void onCategoryChanged(int categoryIndex) =>
       dispatch(CategoryChangedEvent(categoryIndex: categoryIndex));
+
+  /// gets called whenever the value in the view changes
+  void onValueChanged(String value) =>
+      dispatch(ValueChangedEvent(value: double.parse(value)));
 }

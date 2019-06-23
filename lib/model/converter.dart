@@ -85,6 +85,8 @@ class Converter {
   /// the currently selected unit
   static Unit _selectedUnit = selectedCategory.units.elementAt(0);
 
+  static double value;
+
   static Category get selectedCategory => _selectedCategory;
 
   static set selectedCategory(Category category) {
@@ -105,7 +107,7 @@ class Converter {
   }
 
   /// returns a map of unit names with their converted values
-  static Map<String, String> convert(double value) {
+  static Map<String, String> convert() {
     // try to convert the given value into a double
     double parsedValue = double.tryParse(value.toString());
     if (parsedValue == null) {
