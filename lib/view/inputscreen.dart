@@ -14,20 +14,14 @@ class _InputScreenState extends State<InputScreen> {
   /// bloc for the input screen
   final InputScreenBloc bloc = InputScreenBloc();
 
-  /// controller for the value input field
-  final TextEditingController valueController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
-    // valueController.addListener(
-    //     () => bloc.onValueChanged(double.parse(valueController.text)));
   }
 
   /// dispose controller and bloc
   @override
   void dispose() {
-    valueController.dispose();
     bloc.dispose();
     super.dispose();
   }
@@ -39,7 +33,6 @@ class _InputScreenState extends State<InputScreen> {
       child: BlocBuilder(
         bloc: bloc,
         builder: (BuildContext context, InputScreenState state) {
-          valueController.text = state.value;
           return Scaffold(
             appBar: AppBar(
               elevation: 0,
@@ -98,13 +91,13 @@ class _InputScreenState extends State<InputScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextField(
+                  onChanged: bloc.onValueChanged,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 128,
                   ),
                   autofocus: true,
-                  controller: valueController,
                   keyboardType: TextInputType.number,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration.collapsed(
@@ -130,12 +123,11 @@ class _InputScreenState extends State<InputScreen> {
               ),
               onPressed: () {
                 // TODO: remove logic from view
-                bloc.onValueChanged(valueController.text);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => ResultsScreen(
-                          value: valueController.text,
+                          value: Converter.value,
                           unit: Converter.selectedUnit.name,
                           results: Converter.convert(),
                         ),
