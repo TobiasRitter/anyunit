@@ -129,6 +129,7 @@ class _InputScreenState extends State<InputScreen> {
                 "CONVERT",
               ),
               onPressed: () {
+                // TODO: remove logic from view
                 bloc.onValueChanged(valueController.text);
                 Navigator.push(
                   context,
