@@ -84,7 +84,22 @@ class Converter {
           getStandardizedValue: (val) => val / 1.094,
         ),
       },
-    )
+    ),
+    Category(
+      name: "Speed",
+      units: <Unit>{
+        Unit(
+          name: "m/s",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+        Unit(
+          name: "kmh",
+          getConvertedValue: (val) => val * 3.6,
+          getStandardizedValue: (val) => val / 3.6,
+        ),
+      },
+    ),
   };
 
   static Set<Category> get categories => _categories;

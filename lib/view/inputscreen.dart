@@ -3,6 +3,7 @@ import 'package:cleverconvert/model/converter.dart';
 import 'package:cleverconvert/view/resultsscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InputScreen extends StatefulWidget {
   @override
@@ -54,13 +55,14 @@ class _InputScreenState extends State<InputScreen> {
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
               selectedItemColor: Theme.of(context).accentColor,
               onTap: bloc.onCategoryChanged,
               currentIndex: state.categoryIndex,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.fitness_center,
+                    FontAwesomeIcons.weightHanging,
                   ),
                   title: Text(
                     state.categories.elementAt(0),
@@ -68,7 +70,7 @@ class _InputScreenState extends State<InputScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.ac_unit,
+                    FontAwesomeIcons.thermometerHalf,
                   ),
                   title: Text(
                     state.categories.elementAt(1),
@@ -76,10 +78,18 @@ class _InputScreenState extends State<InputScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.directions_walk,
+                    FontAwesomeIcons.ruler,
                   ),
                   title: Text(
                     state.categories.elementAt(2),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesomeIcons.tachometerAlt,
+                  ),
+                  title: Text(
+                    state.categories.elementAt(3),
                   ),
                 ),
               ],

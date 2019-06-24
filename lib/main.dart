@@ -7,7 +7,7 @@ void main() => runApp(CleverConvertApp());
 class CleverConvertApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    bool light = false;
+    bool light = true;
     return MaterialApp(
       title: 'CleverConvert',
       theme: light
