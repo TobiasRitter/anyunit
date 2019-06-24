@@ -110,7 +110,7 @@ class Converter {
   /// the currently selected unit
   static Unit _selectedUnit = selectedCategory.units.elementAt(0);
 
-  static double value;
+  static String value;
 
   static Category get selectedCategory => _selectedCategory;
 
@@ -134,7 +134,7 @@ class Converter {
   /// returns a map of unit names with their converted values
   static Map<String, String> convert() {
     // try to convert the given value into a double
-    double parsedValue = double.tryParse(value.toString());
+    double parsedValue = double.tryParse(value);
     if (parsedValue == null) {
       throw ArgumentError("value is no valid int or double");
     }

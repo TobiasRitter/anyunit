@@ -27,7 +27,7 @@ class CategoryChangedEvent extends InputScreenEvent {
 
 /// gets raised whenever the value is changed
 class ValueChangedEvent extends InputScreenEvent {
-  final double value;
+  final String value;
 
   ValueChangedEvent({
     @required this.value,

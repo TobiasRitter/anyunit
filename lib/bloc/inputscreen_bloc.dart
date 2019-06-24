@@ -51,5 +51,5 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
 
   /// gets called whenever the value in the view changes
   void onValueChanged(String value) =>
-      dispatch(ValueChangedEvent(value: double.parse(value)));
+      dispatch(ValueChangedEvent(value: value));
 }

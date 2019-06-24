@@ -98,7 +98,6 @@ class _InputScreenState extends State<InputScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextField(
-                  onSubmitted: bloc.onValueChanged,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold,
@@ -130,6 +129,7 @@ class _InputScreenState extends State<InputScreen> {
                 "CONVERT",
               ),
               onPressed: () {
+                bloc.onValueChanged(valueController.text);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
