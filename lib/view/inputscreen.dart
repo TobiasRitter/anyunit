@@ -88,7 +88,7 @@ class _InputScreenState extends State<InputScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextField(
-                  onChanged: bloc.onValueChanged,
+                  onSubmitted: bloc.onValueChanged,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold,
