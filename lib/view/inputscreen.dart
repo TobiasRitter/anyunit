@@ -1,5 +1,6 @@
 import 'package:cleverconvert/bloc/bloc.dart';
 import 'package:cleverconvert/model/converter.dart';
+import 'package:cleverconvert/res/strings.dart';
 import 'package:cleverconvert/view/resultsscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +44,7 @@ class _InputScreenState extends State<InputScreen> {
                   ),
                   onPressed: () => showLicensePage(
                         context: context,
+                        applicationLegalese: Strings.licenseText,
                       ),
                 ),
               ],
