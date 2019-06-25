@@ -94,9 +94,14 @@ class Converter {
           getStandardizedValue: (val) => val,
         ),
         Unit(
-          name: "kmh",
+          name: "km/h",
           getConvertedValue: (val) => val * 3.6,
           getStandardizedValue: (val) => val / 3.6,
+        ),
+        Unit(
+          name: "mph",
+          getConvertedValue: (val) => val * 2.237,
+          getStandardizedValue: (val) => val / 2.237,
         ),
       },
     ),

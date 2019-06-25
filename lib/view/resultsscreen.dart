@@ -84,15 +84,16 @@ class _ResultsScreenState extends State<ResultsScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                "${state.results.values.elementAt(index)}",
+                                "${state.results.keys.elementAt(index)}:",
                               ),
                               Text(
-                                "${state.results.keys.elementAt(index)}",
+                                "${state.results.values.elementAt(index)}",
                               ),
                             ],
                           ),
                           trailing: IconButton(
                             onPressed: () {
+                              // TODO: remove logic from view
                               Clipboard.setData(
                                 ClipboardData(
                                   text: state.results.values.elementAt(index),
