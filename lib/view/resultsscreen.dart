@@ -1,5 +1,6 @@
 import 'package:cleverconvert/bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ResultsScreen extends StatefulWidget {
@@ -79,8 +80,33 @@ class _ResultsScreenState extends State<ResultsScreen> {
                     (BuildContext context, int index) {
                   return (index < state.results.length)
                       ? ListTile(
-                          title: Text(
-                            "${state.results.values.elementAt(index)} ${state.results.keys.elementAt(index)}",
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "${state.results.values.elementAt(index)}",
+                              ),
+                              Text(
+                                "${state.results.keys.elementAt(index)}",
+                              ),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            onPressed: () {
+                              Clipboard.setData(
+                                ClipboardData(
+                                  text: state.results.values.elementAt(index),
+                                ),
+                              );
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "Value copied to clipboard",
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: Icon(Icons.content_copy),
                           ),
                         )
                       : null;
