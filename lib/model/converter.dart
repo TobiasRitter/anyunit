@@ -17,6 +17,10 @@ class Converter {
 
   static String value = "";
 
+  static bool get validValue {
+    return double.tryParse(value) != null;
+  }
+
   static Category get selectedCategory => _selectedCategory;
 
   static set selectedCategory(Category category) {
@@ -38,11 +42,12 @@ class Converter {
 
   /// returns a map of unit names with their converted values
   static Map<String, String> convert() {
-    // try to convert the given value into a double
-    double parsedValue = double.tryParse(value);
-    if (parsedValue == null) {
+    if (!validValue) {
       throw ArgumentError("value is no valid int or double");
     }
+
+    // try to convert the given value into a double
+    double parsedValue = double.tryParse(value);
 
     Map<String, String> results = Map();
     // use the standardized value for the calculation

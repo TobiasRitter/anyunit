@@ -119,27 +119,28 @@ class _InputScreenState extends State<InputScreen> {
                 )
               ],
             ),
-            floatingActionButton: FloatingActionButton.extended(
-              label: Text(
-                "CONVERT",
-              ),
-              onPressed: () {
-                // TODO: remove logic from view
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultsScreen(
-                          value: Converter.value,
-                          unit: Converter.selectedUnit.name,
-                          results: Converter.convert(),
+            floatingActionButton: state.convertPossible
+                ? FloatingActionButton.extended(
+                    label: Text(
+                      "CONVERT",
+                    ),
+                    onPressed: () =>
+                        // TODO: remove logic from view
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ResultsScreen(
+                                  value: Converter.value,
+                                  unit: Converter.selectedUnit.name,
+                                  results: Converter.convert(),
+                                ),
+                          ),
                         ),
-                  ),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_forward,
-              ),
-            ),
+                    icon: Icon(
+                      Icons.arrow_forward,
+                    ),
+                  )
+                : null,
           );
         },
       ),

@@ -8,6 +8,7 @@ class InputScreenState extends Equatable {
   final int categoryIndex;
   final Set<String> categories;
   final Set<String> units;
+  final bool convertPossible;
 
   InputScreenState({
     @required this.unit,
@@ -15,6 +16,7 @@ class InputScreenState extends Equatable {
     @required this.categoryIndex,
     @required this.categories,
     @required this.units,
+    @required this.convertPossible,
   }) : super([categoryIndex, categories, unit, units, value]);
 
   factory InputScreenState.initial({
@@ -27,6 +29,7 @@ class InputScreenState extends Equatable {
       categories: categories,
       unit: units.elementAt(0),
       units: units,
+      convertPossible: false,
     );
   }
 
@@ -36,6 +39,7 @@ class InputScreenState extends Equatable {
     String unit,
     Set<String> units,
     String value,
+    bool convertPossible,
   }) {
     return InputScreenState(
       value: value ?? this.value,
@@ -43,6 +47,7 @@ class InputScreenState extends Equatable {
       categoryIndex: categoryIndex ?? this.categoryIndex,
       units: units ?? this.units,
       categories: categories ?? this.categories,
+      convertPossible: convertPossible ?? this.convertPossible,
     );
   }
 }

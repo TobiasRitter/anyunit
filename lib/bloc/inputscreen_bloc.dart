@@ -38,6 +38,7 @@ class InputScreenBloc extends Bloc<InputScreenEvent, InputScreenState> {
       Converter.value = event.value;
       yield currentState.copyWith(
         value: event.value.toString(),
+        convertPossible: Converter.validValue,
       );
     }
   }
