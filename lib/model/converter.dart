@@ -15,7 +15,7 @@ class Converter {
   /// the currently selected unit
   static Unit _selectedUnit = selectedCategory.units.elementAt(0);
 
-  static String value;
+  static String value = "";
 
   static Category get selectedCategory => _selectedCategory;
 
