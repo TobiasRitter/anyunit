@@ -104,6 +104,31 @@ class DBMS {
           ),
         },
       ),
+      Category(
+        name: "Volume",
+        units: <Unit>{
+          Unit(
+            name: "m³",
+            getConvertedValue: (val) => val,
+            getStandardizedValue: (val) => val,
+          ),
+          Unit(
+            name: "cm³",
+            getConvertedValue: (val) => val * 1000,
+            getStandardizedValue: (val) => val / 1000,
+          ),
+          Unit(
+            name: "dm³",
+            getConvertedValue: (val) => val * 1000000,
+            getStandardizedValue: (val) => val / 1000000,
+          ),
+          Unit(
+            name: "l",
+            getConvertedValue: (val) => val * 1000000,
+            getStandardizedValue: (val) => val / 1000000,
+          ),
+        },
+      ),
     };
   }
 
