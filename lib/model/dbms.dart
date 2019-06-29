@@ -1,7 +1,9 @@
 import 'package:cleverconvert/model/category.dart';
 import 'package:cleverconvert/model/unit.dart';
 
+/// object providing basic read and write functionality for the database
 class DBMS {
+  /// returns the set of available units for conversion from the database
   static Set<Category> load() {
     return <Category>{
       Category(
@@ -142,5 +144,6 @@ class DBMS {
     };
   }
 
+  /// saves a set of units to the database
   static void save(Set<Category> categories) {}
 }

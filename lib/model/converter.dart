@@ -7,6 +7,7 @@ class Converter {
   /// load categories from db
   static final Set<Category> _categories = DBMS.load();
 
+  /// returns the categories available for the converter
   static Set<Category> get categories => _categories;
 
   /// the currently selected category
@@ -15,14 +16,18 @@ class Converter {
   /// the currently selected unit
   static Unit _selectedUnit = selectedCategory.units.elementAt(0);
 
+  /// the value currently set for conversion
   static String value = "";
 
+  /// returns if the currently set value is a valid double
   static bool get validValue {
     return double.tryParse(value) != null;
   }
 
+  /// get the currently selected category
   static Category get selectedCategory => _selectedCategory;
 
+  /// selects a category out of the given set of categories
   static set selectedCategory(Category category) {
     if (!_categories.contains(category)) {
       throw ArgumentError("unknown category");
@@ -31,8 +36,10 @@ class Converter {
     _selectedUnit = _selectedCategory.units.elementAt(0);
   }
 
+  /// get the currently selected unit
   static Unit get selectedUnit => _selectedUnit;
 
+  /// selects a unit out of the selected category
   static set selectedUnit(Unit unit) {
     if (!_selectedCategory.units.contains(unit)) {
       throw ArgumentError("unit is not in the selected category");
