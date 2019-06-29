@@ -14,8 +14,12 @@ class Category {
     @required this.name,
     @required this.units,
   }) {
+    // check that the name is not empty
+    if (name == null || name == "") {
+      throw ArgumentError("category name is needed");
+    }
     // check that units is not empty
-    if (units.length == 0) {
+    if (units == null || units.length == 0) {
       throw ArgumentError("at least one unit needed");
     }
   }

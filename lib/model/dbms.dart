@@ -68,6 +68,11 @@ class DBMS {
             getStandardizedValue: (val) => val * 1609.344,
           ),
           Unit(
+            name: "nautic mile",
+            getConvertedValue: (val) => val / 1852,
+            getStandardizedValue: (val) => val * 1852,
+          ),
+          Unit(
             name: "in",
             getConvertedValue: (val) => val * 39.37,
             getStandardizedValue: (val) => val / 39.37,
@@ -101,6 +106,11 @@ class DBMS {
             name: "mph",
             getConvertedValue: (val) => val * 2.237,
             getStandardizedValue: (val) => val / 2.237,
+          ),
+          Unit(
+            name: "knots",
+            getConvertedValue: (val) => val * 1.944,
+            getStandardizedValue: (val) => val / 1.944,
           ),
         },
       ),
