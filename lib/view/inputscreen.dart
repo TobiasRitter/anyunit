@@ -132,11 +132,10 @@ class _InputScreenState extends State<InputScreen> {
                     label: Text(
                       "CONVERT",
                     ),
-                    onPressed: () =>
-                        // TODO: remove logic from view
-                        Navigator.push(
+                    onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
+                            // TODO: remove logic from view
                             builder: (context) => ResultsScreen(
                                   value: Converter.value,
                                   unit: Converter.selectedUnit.name,

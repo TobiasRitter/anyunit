@@ -1,8 +1,19 @@
 import 'package:cleverconvert/model/category.dart';
+import 'package:cleverconvert/model/unit.dart';
 import 'package:test_api/test_api.dart';
 
 void main() {
   test("category name cannot be empty", () {
+    Category(
+      name: "valid",
+      units: <Unit>{
+        Unit(
+          name: "unit",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+      },
+    );
     expect(
         () => Category(
               name: null,
@@ -19,6 +30,16 @@ void main() {
             e is ArgumentError && e.message == "category name is needed")));
   });
   test("units has to contain at least one category", () {
+    Category(
+      name: "valid",
+      units: <Unit>{
+        Unit(
+          name: "unit",
+          getConvertedValue: (val) => val,
+          getStandardizedValue: (val) => val,
+        ),
+      },
+    );
     expect(
         () => Category(
               name: "empty category",

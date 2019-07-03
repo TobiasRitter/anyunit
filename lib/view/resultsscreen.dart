@@ -93,7 +93,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                           ),
                           trailing: IconButton(
                             onPressed: () {
-                              // TODO: remove logic from view
+                              // uses flutter api, therefore in view
                               Clipboard.setData(
                                 ClipboardData(
                                   text: state.results.values.elementAt(index),
