@@ -27,8 +27,26 @@ class _InputScreenState extends State<InputScreen> {
     super.dispose();
   }
 
+  double _calculateFontSize(int textLength) {
+    double _minSize = 48;
+    double tempSize = MediaQuery.of(context).size.width;
+
+    if (textLength == 0) {
+      return _minSize;
+    }
+
+    tempSize /= (1 + textLength * 0.7);
+
+    if (tempSize < _minSize) {
+      return _minSize;
+    }
+
+    return tempSize;
+  }
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController();
     return BlocProvider(
       builder: (context) => InputScreenBloc(),
       child: BlocBuilder(
@@ -43,9 +61,9 @@ class _InputScreenState extends State<InputScreen> {
                     Icons.info_outline,
                   ),
                   onPressed: () => showLicensePage(
-                        context: context,
-                        applicationLegalese: Strings.licenseText,
-                      ),
+                    context: context,
+                    applicationLegalese: Strings.licenseText,
+                  ),
                 ),
               ],
             ),
@@ -102,10 +120,11 @@ class _InputScreenState extends State<InputScreen> {
               children: <Widget>[
                 TextField(
                   onChanged: bloc.onValueChanged,
+                  controller: controller,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: 128,
+                    fontSize: _calculateFontSize(controller.text.length),
                   ),
                   autofocus: true,
                   keyboardType: TextInputType.number,
@@ -133,16 +152,16 @@ class _InputScreenState extends State<InputScreen> {
                       "CONVERT",
                     ),
                     onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            // TODO: remove logic from view
-                            builder: (context) => ResultsScreen(
-                                  value: Converter.value,
-                                  unit: Converter.selectedUnit.name,
-                                  results: Converter.convert(),
-                                ),
-                          ),
+                      context,
+                      MaterialPageRoute(
+                        // TODO: remove logic from view
+                        builder: (context) => ResultsScreen(
+                          value: Converter.value,
+                          unit: Converter.selectedUnit.name,
+                          results: Converter.convert(),
                         ),
+                      ),
+                    ),
                     icon: Icon(
                       Icons.arrow_forward,
                     ),
