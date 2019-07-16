@@ -46,7 +46,7 @@ class _InputScreenState extends State<InputScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
+    TextEditingController _controller = TextEditingController();
     return BlocProvider(
       builder: (context) => InputScreenBloc(),
       child: BlocBuilder(
@@ -120,11 +120,11 @@ class _InputScreenState extends State<InputScreen> {
               children: <Widget>[
                 TextField(
                   onChanged: bloc.onValueChanged,
-                  controller: controller,
+                  controller: _controller,
                   style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold,
-                    fontSize: _calculateFontSize(controller.text.length),
+                    fontSize: _calculateFontSize(_controller.text.length),
                   ),
                   autofocus: true,
                   keyboardType: TextInputType.number,
