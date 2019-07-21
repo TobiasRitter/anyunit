@@ -1,14 +1,16 @@
 # CleverConvert
 
-A unit converter app for your Android.
+A unit converter app for Android.
 
 ## About
 
 This app lets you comfortably convert values into all common units. The project relies on Flutter and Dart.
+It can be downloaded from the Google Play Store at.
 
 ## Usage
 
 To convert a value of a certain unit, just type it into the text field an a table with all other common units will appear.
+Units are grouped into the five distinct categories
 
 ## Dependencies
 

@@ -46,7 +46,6 @@ class _InputScreenState extends State<InputScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _controller = TextEditingController();
     return BlocProvider(
       builder: (context) => InputScreenBloc(),
       child: BlocBuilder(
@@ -118,19 +117,23 @@ class _InputScreenState extends State<InputScreen> {
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                TextField(
-                  onChanged: bloc.onValueChanged,
-                  controller: _controller,
-                  style: TextStyle(
-                    color: Theme.of(context).accentColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: _calculateFontSize(_controller.text.length),
-                  ),
-                  autofocus: true,
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration.collapsed(
-                    hintText: "Enter a value",
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    child: TextField(
+                      onChanged: bloc.onValueChanged,
+                      style: TextStyle(
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: _calculateFontSize(state.value.length),
+                      ),
+                      autofocus: true,
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration.collapsed(
+                        hintText: "Enter a value",
+                      ),
+                    ),
                   ),
                 ),
                 DropdownButton(
