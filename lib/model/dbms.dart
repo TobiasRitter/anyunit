@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cleverconvert/model/category.dart';
 import 'package:cleverconvert/model/unit.dart';
 
@@ -88,6 +90,11 @@ class DBMS {
             name: "yard",
             getConvertedValue: (val) => val * 1.094,
             getStandardizedValue: (val) => val / 1.094,
+          ),
+          Unit(
+            name: "lightyear",
+            getConvertedValue: (val) => val / (9.461 * pow(10, 15)),
+            getStandardizedValue: (val) => val * (9.461 * pow(10, 15)),
           ),
         },
       ),
