@@ -5,7 +5,7 @@ A unit converter app for Android.
 ## About
 
 This app lets you comfortably convert values into all common units. The project relies on Flutter and Dart.
-It can be downloaded from the Google Play Store at.
+It can be downloaded from the [Google Play Store](https://play.google.com/store/apps/details?id=com.tobiasritter.cleverconvert).
 
 ## Usage
 
