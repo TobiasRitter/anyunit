@@ -24,7 +24,7 @@ class InputScreenState extends Equatable {
     @required Set<String> units,
   }) {
     return InputScreenState(
-      value: "0",
+      value: "",
       categoryIndex: 0,
       categories: categories,
       unit: units.elementAt(0),
