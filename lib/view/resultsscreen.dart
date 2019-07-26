@@ -60,60 +60,52 @@ class _ResultsScreenState extends State<ResultsScreen> {
       bloc: bloc,
       builder: (BuildContext context, ResultsScreenState state) {
         return Scaffold(
-          body: CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                expandedHeight: 200,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: Text(
-                    "${state.value} ${state.unit}",
-                    style: TextStyle(
-                      color: Theme.of(context).accentColor,
-                      fontSize: 32,
-                    ),
-                  ),
-                ),
+          appBar: AppBar(
+            title: Text(
+              "${state.value} ${state.unit}",
+              style: TextStyle(
+                color: Theme.of(context).accentColor,
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return (index < state.results.length)
-                      ? ListTile(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                "${state.results.keys.elementAt(index)}:",
-                              ),
-                              Text(
-                                "${state.results.values.elementAt(index)}",
-                              ),
-                            ],
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          body: ListView.builder(
+            itemCount: state.results.length,
+            itemBuilder: (BuildContext ctxt, int index) {
+              return (index < state.results.length)
+                  ? ListTile(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "${state.results.keys.elementAt(index)}:",
                           ),
-                          trailing: IconButton(
-                            onPressed: () {
-                              // uses flutter api, therefore in view
-                              Clipboard.setData(
-                                ClipboardData(
-                                  text: state.results.values.elementAt(index),
-                                ),
-                              );
-                              Scaffold.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    "Value copied to clipboard",
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: Icon(Icons.content_copy),
+                          Text(
+                            "${state.results.values.elementAt(index)}",
                           ),
-                        )
-                      : null;
-                }),
-              )
-            ],
+                        ],
+                      ),
+                      trailing: IconButton(
+                        onPressed: () {
+                          // uses flutter api, therefore in view
+                          Clipboard.setData(
+                            ClipboardData(
+                              text: state.results.values.elementAt(index),
+                            ),
+                          );
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "Value copied to clipboard",
+                              ),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.content_copy),
+                      ),
+                    )
+                  : null;
+            },
           ),
         );
       },
