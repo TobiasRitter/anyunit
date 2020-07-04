@@ -12,6 +12,8 @@ It can be downloaded from the [Google Play Store](https://play.google.com/store/
 To convert a value of a certain unit, just type it into the text field an a table with all other common units will appear.
 Units are grouped into the five distinct categories
 
+![Screenshot CleverConvert](./cleverconvert.png)
+
 ## Dependencies
 
 + [Bloc for Flutter](https://github.com/felangel/bloc/blob/master/packages/flutter_bloc/README.md)
